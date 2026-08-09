@@ -23,7 +23,9 @@ class AboutSection extends StatelessWidget {
 
         return Center(
           child: Container(
-            constraints: const BoxConstraints(maxWidth: Breakpoints.maxContentWidth),
+            constraints: const BoxConstraints(
+              maxWidth: Breakpoints.maxContentWidth,
+            ),
             padding: EdgeInsets.symmetric(
               horizontal: 24,
               vertical: isDesktop ? 112 : (isMobile ? 48 : 80),
@@ -32,14 +34,15 @@ class AboutSection extends StatelessWidget {
                 ? Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        flex: 10,
-                        child: _buildCodeMockupCard(),
-                      ),
+                      Expanded(flex: 10, child: _buildCodeMockupCard()),
                       const SizedBox(width: 80),
                       Expanded(
                         flex: 12,
-                        child: _buildAboutTextContent(aboutSkills, isDesktop, isMobile),
+                        child: _buildAboutTextContent(
+                          aboutSkills,
+                          isDesktop,
+                          isMobile,
+                        ),
                       ),
                     ],
                   )
@@ -87,18 +90,33 @@ class AboutSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _codeLine("import 'package:flutter/material.dart';", AppColors.syntaxControl),
-                _codeLine("import 'package:flutter_bloc/flutter_bloc.dart';", AppColors.syntaxControl),
+                _codeLine(
+                  "import 'package:flutter/material.dart';",
+                  AppColors.syntaxControl,
+                ),
+                _codeLine(
+                  "import 'package:flutter_bloc/flutter_bloc.dart';",
+                  AppColors.syntaxControl,
+                ),
                 const SizedBox(height: 12),
-                _codeLine("class MyApp extends StatelessWidget {", AppColors.syntaxKeyword),
+                _codeLine(
+                  "class MyApp extends StatelessWidget {",
+                  AppColors.syntaxKeyword,
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 14),
-                  child: _codeLine("final String title = \"Flutter Dev\";", AppColors.syntaxVariable),
+                  child: _codeLine(
+                    "final String title = \"Flutter Dev\";",
+                    AppColors.syntaxVariable,
+                  ),
                 ),
                 const SizedBox(height: 12),
                 Padding(
                   padding: const EdgeInsets.only(left: 14),
-                  child: _codeLine("Widget build(BuildContext context) {", AppColors.syntaxFunction),
+                  child: _codeLine(
+                    "Widget build(BuildContext context) {",
+                    AppColors.syntaxFunction,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 28),
@@ -106,11 +124,17 @@ class AboutSection extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 28),
-                  child: _codeLine("theme: AppTheme.dark,", AppColors.syntaxVariable),
+                  child: _codeLine(
+                    "theme: AppTheme.dark,",
+                    AppColors.syntaxVariable,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 28),
-                  child: _codeLine("home: HomeScreen(),", AppColors.syntaxString),
+                  child: _codeLine(
+                    "home: HomeScreen(),",
+                    AppColors.syntaxString,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 28),
@@ -156,7 +180,11 @@ class AboutSection extends StatelessWidget {
     );
   }
 
-  Widget _buildAboutTextContent(List<String> skills, bool isDesktop, bool isMobile) {
+  Widget _buildAboutTextContent(
+    List<String> skills,
+    bool isDesktop,
+    bool isMobile,
+  ) {
     final titleStyle = isDesktop ? AppTypography.h2 : AppTypography.h2Mobile;
 
     return Column(

@@ -6,7 +6,6 @@ abstract class AppStrings {
   static const String navProjects = "Projects";
   static const String navSkills = "Skills";
   static const String navCertificates = "Certificates";
-  static const String navTestimonials = "Testimonials";
   static const String navContact = "Contact";
 
   // Actions
@@ -29,17 +28,18 @@ abstract class AppStrings {
       "Flutter Developer specializing in scalable mobile applications using Clean Architecture, Firebase, SOLID principles, modern UI/UX, and high-performance applications.";
 
   // Section Tags
-  static const String tagAbout = "// About Me";
-  static const String tagExperience = "// Experience";
-  static const String tagSkills = "// Skills";
-  static const String tagProjects = "// Projects";
-  static const String tagImpact = "// Impact";
-  static const String tagCertificates = "// Certificates";
-  static const String tagTestimonials = "// Testimonials";
-  static const String tagContact = "// Get In Touch";
+  static const String tagAbout = "";
+  static const String tagExperience = "";
+  static const String tagSkills = "";
+  static const String tagProjects = "";
+  static const String tagImpact = "";
+  static const String tagCertificates = "";
+  static const String tagTestimonials = "";
+  static const String tagContact = "";
 
   // Section Titles & Subtitles
-  static const String aboutHeadline = "Crafting elegant code\none widget at a time.";
+  static const String aboutHeadline =
+      "Crafting elegant code\none widget at a time.";
   static const String aboutParagraph1 =
       "I'm a passionate Flutter Developer based in Cairo, dedicated to building responsive, fluid, and robust mobile applications that users love.";
   static const String aboutParagraph2 =
@@ -53,7 +53,8 @@ abstract class AppStrings {
 
   static const String projectsTitlePrefix = "Featured ";
   static const String projectsTitleHighlight = "Work";
-  static const String projectsSubtitle = "Every project, engineered to the last pixel.";
+  static const String projectsSubtitle =
+      "Every project, engineered to the last pixel.";
 
   static const String impactTitlePrefix = "By the ";
   static const String impactTitleHighlight = "Numbers";

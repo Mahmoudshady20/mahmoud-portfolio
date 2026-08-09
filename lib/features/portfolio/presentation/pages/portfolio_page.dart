@@ -12,7 +12,6 @@ import 'package:mahmoud_portfolio/features/portfolio/presentation/sections/06_sk
 import 'package:mahmoud_portfolio/features/portfolio/presentation/sections/07_projects/projects_section.dart';
 import 'package:mahmoud_portfolio/features/portfolio/presentation/sections/08_impact/impact_section.dart';
 import 'package:mahmoud_portfolio/features/portfolio/presentation/sections/09_certificates/certificates_section.dart';
-import 'package:mahmoud_portfolio/features/portfolio/presentation/sections/10_testimonials/testimonials_section.dart';
 import 'package:mahmoud_portfolio/features/portfolio/presentation/sections/11_contact/contact_section.dart';
 import 'package:mahmoud_portfolio/features/portfolio/presentation/sections/12_footer/footer_section.dart';
 
@@ -50,10 +49,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     width: double.infinity,
                     child: const HeroSection(),
                   ),
-                  const SizedBox(
-                    width: double.infinity,
-                    child: StatsSection(),
-                  ),
+                  const SizedBox(width: double.infinity, child: StatsSection()),
                   SizedBox(
                     key: navCubit.sectionKeys['about'],
                     width: double.infinity,
@@ -82,11 +78,6 @@ class _PortfolioPageState extends State<PortfolioPage> {
                     key: navCubit.sectionKeys['certificates'],
                     width: double.infinity,
                     child: const CertificatesSection(),
-                  ),
-                  SizedBox(
-                    key: navCubit.sectionKeys['testimonials'],
-                    width: double.infinity,
-                    child: const TestimonialsSection(),
                   ),
                   SizedBox(
                     key: navCubit.sectionKeys['contact'],

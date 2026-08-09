@@ -4,7 +4,6 @@ import '../entities/experience_entity.dart';
 import '../entities/skill_entity.dart';
 import '../entities/project_entity.dart';
 import '../entities/certificate_entity.dart';
-import '../entities/testimonial_entity.dart';
 
 abstract class PortfolioRepository {
   List<NavItem> getNavItems();
@@ -14,6 +13,5 @@ abstract class PortfolioRepository {
   List<SkillEntity> getSkills();
   List<ProjectEntity> getProjects();
   List<CertificateEntity> getCertificates();
-  List<TestimonialEntity> getTestimonials();
   List<String> getAboutSkills();
 }

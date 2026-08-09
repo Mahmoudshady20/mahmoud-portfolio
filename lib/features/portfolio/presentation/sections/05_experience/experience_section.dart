@@ -24,7 +24,9 @@ class ExperienceSection extends StatelessWidget {
 
         return Center(
           child: Container(
-            constraints: const BoxConstraints(maxWidth: Breakpoints.maxContentWidth),
+            constraints: const BoxConstraints(
+              maxWidth: Breakpoints.maxContentWidth,
+            ),
             padding: EdgeInsets.symmetric(
               horizontal: 24,
               vertical: isMobile ? 48 : 112,
@@ -43,7 +45,8 @@ class ExperienceSection extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: experiences.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: 32),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 32),
                   itemBuilder: (context, index) {
                     final exp = experiences[index];
                     final accentColor = index == 0
@@ -60,7 +63,11 @@ class ExperienceSection extends StatelessWidget {
     );
   }
 
-  Widget _buildExperienceCard(ExperienceEntity exp, Color accentColor, bool isMobile) {
+  Widget _buildExperienceCard(
+    ExperienceEntity exp,
+    Color accentColor,
+    bool isMobile,
+  ) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -113,9 +120,7 @@ class ExperienceSection extends StatelessWidget {
                   top: 0,
                   bottom: 0,
                   width: 3,
-                  child: Container(
-                    color: accentColor.withValues(alpha: 0.7),
-                  ),
+                  child: Container(color: accentColor.withValues(alpha: 0.7)),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(24),
@@ -188,7 +193,9 @@ class ExperienceSection extends StatelessWidget {
                       Wrap(
                         spacing: 8,
                         runSpacing: 8,
-                        children: exp.technologies.map((t) => TechPill(label: t)).toList(),
+                        children: exp.technologies
+                            .map((t) => TechPill(label: t))
+                            .toList(),
                       ),
                     ],
                   ),
@@ -207,10 +214,7 @@ class ExperienceSection extends StatelessWidget {
       decoration: BoxDecoration(
         color: accentColor.withValues(alpha: 0.08),
         borderRadius: AppDecorations.radiusPill,
-        border: Border.all(
-          color: accentColor.withValues(alpha: 0.2),
-          width: 1,
-        ),
+        border: Border.all(color: accentColor.withValues(alpha: 0.2), width: 1),
       ),
       child: Text(
         period,

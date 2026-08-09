@@ -23,7 +23,9 @@ class ContactSection extends StatelessWidget {
 
         return Center(
           child: Container(
-            constraints: const BoxConstraints(maxWidth: Breakpoints.maxContentWidth),
+            constraints: const BoxConstraints(
+              maxWidth: Breakpoints.maxContentWidth,
+            ),
             padding: EdgeInsets.symmetric(
               horizontal: 24,
               vertical: isMobile ? 48 : 112,
@@ -55,7 +57,7 @@ class ContactSection extends StatelessWidget {
                     _buildContactCard(
                       icon: Icons.code_rounded,
                       title: "GitHub",
-                      value: "github.com/mahmoudshady25",
+                      value: "github.com/mahmoudshady20",
                       isMobile: isMobile,
                       onTap: () => UrlHelper.openUrl(AppConstants.githubUrl),
                     ),
@@ -85,8 +87,15 @@ class ContactSection extends StatelessWidget {
                   children: [
                     AppGradientButton(
                       text: "Send Message / Email",
-                      icon: const Icon(Icons.send_rounded, size: 16, color: Colors.white),
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+                      icon: const Icon(
+                        Icons.send_rounded,
+                        size: 16,
+                        color: Colors.white,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 14,
+                      ),
                       onPressed: () => UrlHelper.sendEmail(
                         AppConstants.email,
                         subject: "Flutter Project Inquiry",
@@ -94,9 +103,17 @@ class ContactSection extends StatelessWidget {
                     ),
                     AppOutlineButton(
                       text: "Download Resume",
-                      icon: const Icon(Icons.download_rounded, size: 16, color: AppColors.primary),
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                      onPressed: () => UrlHelper.openUrl(AppConstants.cvDownloadUrl),
+                      icon: const Icon(
+                        Icons.download_rounded,
+                        size: 16,
+                        color: AppColors.primary,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 14,
+                      ),
+                      onPressed: () =>
+                          UrlHelper.openUrl(AppConstants.cvDownloadUrl),
                     ),
                   ],
                 ),
@@ -116,7 +133,10 @@ class ContactSection extends StatelessWidget {
     VoidCallback? onTap,
   }) {
     return GlassCard(
-      padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 20, vertical: 16),
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? 16 : 20,
+        vertical: 16,
+      ),
       borderRadius: AppDecorations.radiusXl,
       onTap: onTap,
       child: ConstrainedBox(
@@ -130,7 +150,9 @@ class ContactSection extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.primary.withValues(alpha: 0.1),
                 borderRadius: AppDecorations.radiusSm,
-                border: Border.all(color: AppColors.primary.withValues(alpha: 0.2)),
+                border: Border.all(
+                  color: AppColors.primary.withValues(alpha: 0.2),
+                ),
               ),
               child: Icon(icon, color: AppColors.primary, size: 20),
             ),

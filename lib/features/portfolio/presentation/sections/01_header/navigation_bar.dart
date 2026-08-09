@@ -17,10 +17,7 @@ import 'package:mahmoud_portfolio/features/portfolio/presentation/cubit/navigati
 class CustomNavigationBar extends StatelessWidget {
   final GlobalKey<ScaffoldState> scaffoldKey;
 
-  const CustomNavigationBar({
-    super.key,
-    required this.scaffoldKey,
-  });
+  const CustomNavigationBar({super.key, required this.scaffoldKey});
 
   @override
   Widget build(BuildContext context) {
@@ -38,14 +35,18 @@ class CustomNavigationBar extends StatelessWidget {
                 : Colors.transparent,
             border: Border(
               bottom: BorderSide(
-                color: state.isScrolled ? AppColors.borderSubtle : Colors.transparent,
+                color: state.isScrolled
+                    ? AppColors.borderSubtle
+                    : Colors.transparent,
                 width: 1,
               ),
             ),
           ),
           child: Center(
             child: Container(
-              constraints: const BoxConstraints(maxWidth: Breakpoints.maxContentWidth),
+              constraints: const BoxConstraints(
+                maxWidth: Breakpoints.maxContentWidth,
+              ),
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -54,9 +55,7 @@ class CustomNavigationBar extends StatelessWidget {
                   if (isDesktop) ...[
                     const SizedBox(width: 16),
                     Expanded(
-                      child: Center(
-                        child: _buildNavItems(context, state),
-                      ),
+                      child: Center(child: _buildNavItems(context, state)),
                     ),
                     const SizedBox(width: 16),
                     _buildActions(context),
@@ -140,7 +139,6 @@ class CustomNavigationBar extends StatelessWidget {
       {'label': AppStrings.navSkills, 'key': 'skills'},
       {'label': AppStrings.navProjects, 'key': 'projects'},
       {'label': AppStrings.navCertificates, 'key': 'certificates'},
-      {'label': AppStrings.navTestimonials, 'key': 'testimonials'},
       {'label': AppStrings.navContact, 'key': 'contact'},
     ];
 
@@ -153,7 +151,8 @@ class CustomNavigationBar extends StatelessWidget {
           return _NavItemButton(
             label: item['label']!,
             isActive: isActive,
-            onTap: () => context.read<NavigationCubit>().scrollToSection(item['key']!),
+            onTap: () =>
+                context.read<NavigationCubit>().scrollToSection(item['key']!),
           );
         }).toList(),
       ),
@@ -175,7 +174,8 @@ class CustomNavigationBar extends StatelessWidget {
           text: AppStrings.hireMe,
           height: 38,
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          onPressed: () => context.read<NavigationCubit>().scrollToSection('contact'),
+          onPressed: () =>
+              context.read<NavigationCubit>().scrollToSection('contact'),
         ),
       ],
     );
@@ -233,7 +233,9 @@ class _NavItemButtonState extends State<_NavItemButton> {
             decoration: BoxDecoration(
               color: widget.isActive
                   ? AppColors.primary.withValues(alpha: 0.15)
-                  : ((_isHovered || _isFocused) ? AppColors.glassSurfaceHover : Colors.transparent),
+                  : ((_isHovered || _isFocused)
+                        ? AppColors.glassSurfaceHover
+                        : Colors.transparent),
               borderRadius: AppDecorations.radiusSm,
               border: Border.all(
                 color: widget.isActive
@@ -250,7 +252,9 @@ class _NavItemButtonState extends State<_NavItemButton> {
                 fontWeight: widget.isActive ? FontWeight.w600 : FontWeight.w500,
                 color: widget.isActive
                     ? AppColors.primary
-                    : ((_isHovered || _isFocused) ? AppColors.textWhite : AppColors.textSecondary),
+                    : ((_isHovered || _isFocused)
+                          ? AppColors.textWhite
+                          : AppColors.textSecondary),
               ),
             ),
           ),

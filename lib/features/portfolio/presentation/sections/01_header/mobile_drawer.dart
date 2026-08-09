@@ -26,7 +26,6 @@ class MobileDrawer extends StatelessWidget {
           {'label': AppStrings.navSkills, 'key': 'skills', 'icon': Icons.bolt_rounded},
           {'label': AppStrings.navProjects, 'key': 'projects', 'icon': Icons.code_rounded},
           {'label': AppStrings.navCertificates, 'key': 'certificates', 'icon': Icons.verified_rounded},
-          {'label': AppStrings.navTestimonials, 'key': 'testimonials', 'icon': Icons.format_quote_rounded},
           {'label': AppStrings.navContact, 'key': 'contact', 'icon': Icons.mail_rounded},
         ];
 

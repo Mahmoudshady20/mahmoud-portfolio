@@ -34,7 +34,7 @@ class CustomNavigationBar extends StatelessWidget {
           height: 70,
           decoration: BoxDecoration(
             color: state.isScrolled
-                ? AppColors.background.withValues(alpha: 0.9)
+                ? AppColors.background.withValues(alpha: 0.95)
                 : Colors.transparent,
             border: Border(
               bottom: BorderSide(
@@ -137,8 +137,8 @@ class CustomNavigationBar extends StatelessWidget {
       {'label': AppStrings.navHome, 'key': 'home'},
       {'label': AppStrings.navAbout, 'key': 'about'},
       {'label': AppStrings.navExperience, 'key': 'experience'},
-      {'label': AppStrings.navProjects, 'key': 'projects'},
       {'label': AppStrings.navSkills, 'key': 'skills'},
+      {'label': AppStrings.navProjects, 'key': 'projects'},
       {'label': AppStrings.navCertificates, 'key': 'certificates'},
       {'label': AppStrings.navTestimonials, 'key': 'testimonials'},
       {'label': AppStrings.navContact, 'key': 'contact'},
@@ -232,12 +232,15 @@ class _NavItemButtonState extends State<_NavItemButton> {
             margin: const EdgeInsets.symmetric(horizontal: 1),
             decoration: BoxDecoration(
               color: widget.isActive
-                  ? AppColors.primary.withValues(alpha: 0.12)
+                  ? AppColors.primary.withValues(alpha: 0.15)
                   : ((_isHovered || _isFocused) ? AppColors.glassSurfaceHover : Colors.transparent),
               borderRadius: AppDecorations.radiusSm,
-              border: _isFocused
-                  ? Border.all(color: AppColors.primary, width: 1.5)
-                  : null,
+              border: Border.all(
+                color: widget.isActive
+                    ? AppColors.primary.withValues(alpha: 0.3)
+                    : (_isFocused ? AppColors.primary : Colors.transparent),
+                width: 1,
+              ),
             ),
             child: Text(
               widget.label,

@@ -34,59 +34,80 @@ class _PortfolioPageState extends State<PortfolioPage> {
       key: _scaffoldKey,
       backgroundColor: AppColors.background,
       endDrawer: const MobileDrawer(),
-      body: Stack(
-        children: [
-          SingleChildScrollView(
-            controller: navCubit.scrollController,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(height: 70),
-                Container(
-                  key: navCubit.sectionKeys['home'],
-                  child: const HeroSection(),
-                ),
-                const StatsSection(),
-                Container(
-                  key: navCubit.sectionKeys['about'],
-                  child: const AboutSection(),
-                ),
-                Container(
-                  key: navCubit.sectionKeys['experience'],
-                  child: const ExperienceSection(),
-                ),
-                Container(
-                  key: navCubit.sectionKeys['skills'],
-                  child: const SkillsSection(),
-                ),
-                Container(
-                  key: navCubit.sectionKeys['projects'],
-                  child: const ProjectsSection(),
-                ),
-                const ImpactSection(),
-                Container(
-                  key: navCubit.sectionKeys['certificates'],
-                  child: const CertificatesSection(),
-                ),
-                Container(
-                  key: navCubit.sectionKeys['testimonials'],
-                  child: const TestimonialsSection(),
-                ),
-                Container(
-                  key: navCubit.sectionKeys['contact'],
-                  child: const ContactSection(),
-                ),
-                const FooterSection(),
-              ],
+      body: SizedBox(
+        width: double.infinity,
+        height: double.infinity,
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              controller: navCubit.scrollController,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 70),
+                  SizedBox(
+                    key: navCubit.sectionKeys['home'],
+                    width: double.infinity,
+                    child: const HeroSection(),
+                  ),
+                  const SizedBox(
+                    width: double.infinity,
+                    child: StatsSection(),
+                  ),
+                  SizedBox(
+                    key: navCubit.sectionKeys['about'],
+                    width: double.infinity,
+                    child: const AboutSection(),
+                  ),
+                  SizedBox(
+                    key: navCubit.sectionKeys['experience'],
+                    width: double.infinity,
+                    child: const ExperienceSection(),
+                  ),
+                  SizedBox(
+                    key: navCubit.sectionKeys['skills'],
+                    width: double.infinity,
+                    child: const SkillsSection(),
+                  ),
+                  SizedBox(
+                    key: navCubit.sectionKeys['projects'],
+                    width: double.infinity,
+                    child: const ProjectsSection(),
+                  ),
+                  const SizedBox(
+                    width: double.infinity,
+                    child: ImpactSection(),
+                  ),
+                  SizedBox(
+                    key: navCubit.sectionKeys['certificates'],
+                    width: double.infinity,
+                    child: const CertificatesSection(),
+                  ),
+                  SizedBox(
+                    key: navCubit.sectionKeys['testimonials'],
+                    width: double.infinity,
+                    child: const TestimonialsSection(),
+                  ),
+                  SizedBox(
+                    key: navCubit.sectionKeys['contact'],
+                    width: double.infinity,
+                    child: const ContactSection(),
+                  ),
+                  const SizedBox(
+                    width: double.infinity,
+                    child: FooterSection(),
+                  ),
+                ],
+              ),
             ),
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: CustomNavigationBar(scaffoldKey: _scaffoldKey),
-          ),
-        ],
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: CustomNavigationBar(scaffoldKey: _scaffoldKey),
+            ),
+          ],
+        ),
       ),
     );
   }

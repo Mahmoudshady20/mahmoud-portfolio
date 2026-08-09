@@ -12,7 +12,6 @@ class NavigationCubit extends Cubit<NavigationState> {
     'skills': GlobalKey(),
     'projects': GlobalKey(),
     'certificates': GlobalKey(),
-    'testimonials': GlobalKey(),
     'contact': GlobalKey(),
   };
 
@@ -70,7 +69,6 @@ class NavigationCubit extends Cubit<NavigationState> {
       'skills',
       'projects',
       'certificates',
-      'testimonials',
       'contact',
     ];
 

@@ -95,7 +95,7 @@ class ProjectsSection extends StatelessWidget {
             fontFamily: AppTypography.fontPrimary,
             fontSize: 14,
             fontWeight: FontWeight.w500,
-            color: Color(0x73E8EDF5), // rgba(232, 237, 245, 0.45)
+            color: Color(0x73E8EDF5),
           ),
         ),
         const SizedBox(height: 16),
@@ -175,6 +175,13 @@ class ProjectsSection extends StatelessWidget {
                 height: 40,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 onPressed: () => UrlHelper.openUrl(project.playStoreUrl!),
+              ),
+            if (project.appStoreUrl != null)
+              AppOutlineButton(
+                text: AppStrings.appStore,
+                height: 40,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                onPressed: () => UrlHelper.openUrl(project.appStoreUrl!),
               ),
           ],
         ),

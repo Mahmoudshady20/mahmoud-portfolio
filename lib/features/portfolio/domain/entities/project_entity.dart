@@ -10,6 +10,7 @@ class ProjectEntity extends Equatable {
   final String? liveDemoUrl;
   final String? githubUrl;
   final String? playStoreUrl;
+  final String? appStoreUrl;
 
   const ProjectEntity({
     required this.number,
@@ -21,6 +22,7 @@ class ProjectEntity extends Equatable {
     this.liveDemoUrl,
     this.githubUrl,
     this.playStoreUrl,
+    this.appStoreUrl,
   });
 
   @override
@@ -34,5 +36,6 @@ class ProjectEntity extends Equatable {
         liveDemoUrl,
         githubUrl,
         playStoreUrl,
+        appStoreUrl,
       ];
 }

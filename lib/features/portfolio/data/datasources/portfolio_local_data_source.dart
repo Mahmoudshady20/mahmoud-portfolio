@@ -23,10 +23,9 @@ class PortfolioLocalDataSourceImpl implements PortfolioLocalDataSource {
       NavItem(label: "Home", sectionKey: "home"),
       NavItem(label: "About", sectionKey: "about"),
       NavItem(label: "Experience", sectionKey: "experience"),
-      NavItem(label: "Projects", sectionKey: "projects"),
       NavItem(label: "Skills", sectionKey: "skills"),
+      NavItem(label: "Projects", sectionKey: "projects"),
       NavItem(label: "Certificates", sectionKey: "certificates"),
-      NavItem(label: "Testimonials", sectionKey: "testimonials"),
       NavItem(label: "Contact", sectionKey: "contact"),
     ];
   }
@@ -62,48 +61,53 @@ class PortfolioLocalDataSourceImpl implements PortfolioLocalDataSource {
         number: "01",
         role: "Flutter Developer",
         company: "TARA Company",
-        period: "Jul 2025 – Present",
+        period: "2024 — Present",
         description:
-            "Leading Flutter development for enterprise-grade mobile applications, architecting robust scalable codebases, and collaborating with cross-functional teams to deliver exceptional digital experiences.",
+            "Architecting and developing cross-platform enterprise mobile applications from ground up. Implementing Clean Architecture, Bloc state management, Firebase backend integration, offline caching, and responsive UI across iOS and Android.",
         technologies: [
           "Flutter",
           "Dart",
           "Bloc",
-          "Firebase",
           "Clean Architecture",
-          "REST API",
+          "Firebase",
+          "REST APIs",
+          "Hive",
+          "SOLID",
         ],
       ),
       ExperienceEntity(
         number: "02",
         role: "Flutter Developer",
         company: "Phlera Company",
-        period: "Mar 2024 – Jun 2025",
+        period: "2023 — 2024",
         description:
-            "Built and shipped multiple cross-platform applications with complex state management, realtime cloud integrations, offline caching, and intuitive reactive user interfaces.",
+            "Built consumer-facing mobile solutions with advanced animations, custom UI components, localization (English/Arabic), real-time push notifications, payment gateway integrations, and CI/CD automated deployment pipelines.",
         technologies: [
           "Flutter",
-          "Firebase",
-          "Supabase",
-          "Provider",
           "Cubit",
+          "Provider",
+          "Supabase",
           "Dio",
+          "Git",
+          "App Store",
+          "Google Play",
         ],
       ),
       ExperienceEntity(
         number: "03",
-        role: "Flutter Trainee",
+        role: "Junior Mobile Developer",
         company: "Shbaak Company",
-        period: "Aug 2023 – Jan 2024",
+        period: "2022 — 2023",
         description:
-            "Intensive hands-on training in Flutter development, mastering Clean Architecture, local database management with Hive and SQLite, and building responsive production-ready UIs.",
+            "Collaborated in cross-functional agile teams to deliver native Android (Java) and cross-platform Flutter applications. Focused on API integrations, local database management (SQLite/Hive), and UI bug fixing.",
         technologies: [
           "Flutter",
-          "Dart",
-          "Git",
-          "Hive",
+          "Android",
+          "Java",
           "SQLite",
-          "Responsive UI",
+          "REST API",
+          "MVVM",
+          "Figma",
         ],
       ),
     ];
@@ -166,9 +170,12 @@ class PortfolioLocalDataSourceImpl implements PortfolioLocalDataSource {
           "GetIt",
           "GoRouter",
         ],
-        liveDemoUrl: "https://github.com/mahmoudshady255",
-        githubUrl: "https://github.com/mahmoudshady255",
-        playStoreUrl: "https://play.google.com",
+        liveDemoUrl: "https://github.com/Mahmoudshady20/rosycalc",
+        githubUrl: "https://github.com/Mahmoudshady20/rosycalc",
+        playStoreUrl:
+            "https://play.google.com/store/apps/details?id=cc.hayah.rosycalc",
+        appStoreUrl:
+            "https://apps.apple.com/us/app/%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D8%A8%D8%A9-%D8%A7%D9%84%D9%88%D8%B1%D8%AF%D9%8A%D8%A9/id945718475",
       ),
       ProjectEntity(
         number: "02",
@@ -198,8 +205,8 @@ class PortfolioLocalDataSourceImpl implements PortfolioLocalDataSource {
         githubUrl: "https://github.com/Mahmoudshady20/Qudratuhh",
         playStoreUrl:
             "https://play.google.com/store/apps/details?id=cc.hayah.qdrato",
+        appStoreUrl: "https://apps.apple.com/app/id6787664251",
       ),
-
       ProjectEntity(
         number: "03",
         title: "Rejeemat",
@@ -229,8 +236,9 @@ class PortfolioLocalDataSourceImpl implements PortfolioLocalDataSource {
         githubUrl: "https://github.com/Mahmoudshady20/Rejeematt",
         playStoreUrl:
             "https://play.google.com/store/apps/details?id=cc.hayah.rogemat",
+        appStoreUrl:
+            "https://apps.apple.com/us/app/%D8%B1%D8%AC%D9%8A%D9%85%D8%A7%D8%AA/id962051856",
       ),
-
       ProjectEntity(
         number: "04",
         title: "Green Egypt Eco System",
@@ -261,7 +269,6 @@ class PortfolioLocalDataSourceImpl implements PortfolioLocalDataSource {
         playStoreUrl:
             "https://play.google.com/store/apps/details?id=com.daif.recycling_eco_system",
       ),
-
       ProjectEntity(
         number: "05",
         title: "Islami",
@@ -281,8 +288,9 @@ class PortfolioLocalDataSourceImpl implements PortfolioLocalDataSource {
         githubUrl: "https://github.com/Mahmoudshady20/Islami-App",
         playStoreUrl:
             "https://play.google.com/store/apps/details?id=com.example.muslim.islami_app",
+        appStoreUrl:
+            "https://apps.apple.com/eg/app/%D8%A7%D8%B3%D9%84%D8%A7%D9%85%D9%8A/id949557505اسلامي",
       ),
-
       ProjectEntity(
         number: "06",
         title: "Doa2k",
@@ -313,7 +321,6 @@ class PortfolioLocalDataSourceImpl implements PortfolioLocalDataSource {
         playStoreUrl:
             "https://play.google.com/store/apps/details?id=com.example.doaa",
       ),
-
       ProjectEntity(
         number: "07",
         title: "Sba7o Rz3",
@@ -343,7 +350,6 @@ class PortfolioLocalDataSourceImpl implements PortfolioLocalDataSource {
         playStoreUrl:
             "https://play.google.com/store/apps/details?id=com.example.sba7o_rz3_new_ui",
       ),
-
       ProjectEntity(
         number: "08",
         title: "Greena",
@@ -374,6 +380,7 @@ class PortfolioLocalDataSourceImpl implements PortfolioLocalDataSource {
         githubUrl: "https://github.com/Mahmoudshady20/greena-app",
         playStoreUrl:
             "https://play.google.com/store/apps/details?id=com.example.greena_app",
+        appStoreUrl: "https://apps.apple.com",
       ),
     ];
   }

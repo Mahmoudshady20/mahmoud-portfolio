@@ -16,6 +16,7 @@ abstract class AppStrings {
   static const String liveDemo = "Live Demo";
   static const String github = "GitHub ⑂";
   static const String playStore = "▶ Play";
+  static const String appStore = " App Store";
 
   // Hero Section
   static const String heroTag = "Flutter Developer";

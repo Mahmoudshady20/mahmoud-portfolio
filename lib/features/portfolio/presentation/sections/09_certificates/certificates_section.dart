@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
+import 'package:mahmoud_portfolio/core/animations/stagger_animation.dart';
 import 'package:mahmoud_portfolio/core/constants/app_strings.dart';
 import 'package:mahmoud_portfolio/core/di/injection_container.dart';
 import 'package:mahmoud_portfolio/core/responsive/responsive_builder.dart';
@@ -55,7 +57,15 @@ class CertificatesSection extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final cert = certificates[index];
                     final accentColor = _getCertColor(index);
-                    return _buildCertificateCard(cert, accentColor);
+                    return ScrollReveal(
+                      delay: staggerDelay(index, interval: const Duration(milliseconds: 70)),
+                      offsetY: 18,
+                      duration: const Duration(milliseconds: 350),
+                      child: _CertificateCard(
+                        cert: cert,
+                        accentColor: accentColor,
+                      ),
+                    );
                   },
                 ),
               ],
@@ -79,85 +89,128 @@ class CertificatesSection extends StatelessWidget {
         return AppColors.green;
     }
   }
+}
 
-  Widget _buildCertificateCard(CertificateEntity cert, Color accentColor) {
-    return GlassCard(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      borderRadius: AppDecorations.radiusXl,
-      onTap: cert.url != null ? () => UrlHelper.openUrl(cert.url!) : null,
-      child: Row(
-        children: [
-          Container(
-            width: 48,
-            height: 48,
-            decoration: BoxDecoration(
-              color: accentColor.withValues(alpha: 0.08),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: accentColor.withValues(alpha: 0.2)),
-            ),
-            child: Center(
-              child: Text(
-                "✦",
-                style: TextStyle(fontSize: 18, color: accentColor),
+/// Certificate card with hover-slide animation on the arrow icon.
+class _CertificateCard extends StatefulWidget {
+  final CertificateEntity cert;
+  final Color accentColor;
+
+  const _CertificateCard({
+    required this.cert,
+    required this.accentColor,
+  });
+
+  @override
+  State<_CertificateCard> createState() => _CertificateCardState();
+}
+
+class _CertificateCardState extends State<_CertificateCard> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: GlassCard(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+        borderRadius: AppDecorations.radiusXl,
+        onTap: widget.cert.url != null
+            ? () => UrlHelper.openUrl(widget.cert.url!)
+            : null,
+        child: Row(
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: widget.accentColor.withValues(alpha: 0.08),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: widget.accentColor.withValues(alpha: 0.2),
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  "✦",
+                  style: TextStyle(fontSize: 18, color: widget.accentColor),
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  cert.title,
-                  style: TextStyle(
-                    fontFamily: AppTypography.fontPrimary,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.textWhite,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 3),
-                Text(
-                  cert.issuer,
-                  style: TextStyle(
-                    fontFamily: AppTypography.fontPrimary,
-                    fontSize: 12,
-                    color: const Color(0x73E8EDF5),
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const SizedBox(height: 6),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: accentColor.withValues(alpha: 0.08),
-                    borderRadius: AppDecorations.radiusPill,
-                    border: Border.all(color: accentColor.withValues(alpha: 0.18)),
-                  ),
-                  child: Text(
-                    cert.year,
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.cert.title,
                     style: TextStyle(
-                      fontFamily: AppTypography.fontMono,
-                      fontSize: 11,
-                      color: accentColor,
+                      fontFamily: AppTypography.fontPrimary,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textWhite,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 3),
+                  Text(
+                    widget.cert.issuer,
+                    style: TextStyle(
+                      fontFamily: AppTypography.fontPrimary,
+                      fontSize: 12,
+                      color: const Color(0x73E8EDF5),
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const SizedBox(height: 6),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: widget.accentColor.withValues(alpha: 0.08),
+                      borderRadius: AppDecorations.radiusPill,
+                      border: Border.all(
+                        color: widget.accentColor.withValues(alpha: 0.18),
+                      ),
+                    ),
+                    child: Text(
+                      widget.cert.year,
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontMono,
+                        fontSize: 11,
+                        color: widget.accentColor,
+                      ),
                     ),
                   ),
+                ],
+              ),
+            ),
+            // Animated arrow with hover-slide
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              transform: Matrix4.translationValues(
+                _isHovered ? 4.0 : 0.0,
+                0,
+                0,
+              ),
+              child: Text(
+                "→",
+                style: TextStyle(
+                  fontSize: 18,
+                  color: _isHovered
+                      ? widget.accentColor
+                      : widget.accentColor.withValues(alpha: 0.6),
                 ),
-              ],
+              ),
             ),
-          ),
-          Text(
-            "→",
-            style: TextStyle(
-              fontSize: 18,
-              color: accentColor.withValues(alpha: 0.6),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

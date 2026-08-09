@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
+import 'package:mahmoud_portfolio/core/animations/stagger_animation.dart';
 import 'package:mahmoud_portfolio/core/constants/app_strings.dart';
 import 'package:mahmoud_portfolio/core/di/injection_container.dart';
 import 'package:mahmoud_portfolio/core/responsive/breakpoints.dart';
@@ -11,6 +13,7 @@ import 'package:mahmoud_portfolio/core/widgets/cards/glass_card.dart';
 import 'package:mahmoud_portfolio/core/widgets/section_header.dart';
 import 'package:mahmoud_portfolio/features/portfolio/domain/entities/skill_entity.dart';
 import 'package:mahmoud_portfolio/features/portfolio/domain/repositories/portfolio_repository.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class SkillsSection extends StatelessWidget {
   const SkillsSection({super.key});
@@ -66,7 +69,15 @@ class SkillsSection extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final skill = skills[index];
                     final accentColor = _getSkillColor(index);
-                    return _buildSkillCard(skill, accentColor);
+                    return ScrollReveal(
+                      delay: staggerDelay(index, interval: const Duration(milliseconds: 50)),
+                      offsetY: 16,
+                      duration: const Duration(milliseconds: 350),
+                      child: _AnimatedSkillCard(
+                        skill: skill,
+                        accentColor: accentColor,
+                      ),
+                    );
                   },
                 ),
               ],
@@ -90,88 +101,170 @@ class SkillsSection extends StatelessWidget {
         return AppColors.purple;
     }
   }
+}
 
-  Widget _buildSkillCard(SkillEntity skill, Color accentColor) {
-    return GlassCard(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      borderRadius: AppDecorations.radiusXl,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  color: accentColor.withValues(alpha: 0.08),
-                  borderRadius: AppDecorations.radiusSm,
-                  border: Border.all(color: accentColor.withValues(alpha: 0.2)),
-                ),
-                child: Center(
-                  child: Text(
-                    skill.iconGlyph,
-                    style: const TextStyle(fontSize: 14, color: AppColors.textPrimary),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  skill.name,
-                  style: TextStyle(
-                    fontFamily: AppTypography.fontPrimary,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.textWhite,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Container(
-            height: 3,
-            decoration: BoxDecoration(
-              color: const Color(0x12FFFFFF),
-              borderRadius: BorderRadius.circular(2),
-            ),
-            child: LayoutBuilder(
-              builder: (context, constraints) {
-                return Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    width: constraints.maxWidth * (skill.percentage / 100.0),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          accentColor,
-                          accentColor.withValues(alpha: 0.67),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(2),
+/// A skill card with an animated progress bar that fills when visible.
+class _AnimatedSkillCard extends StatefulWidget {
+  final SkillEntity skill;
+  final Color accentColor;
+
+  const _AnimatedSkillCard({
+    required this.skill,
+    required this.accentColor,
+  });
+
+  @override
+  State<_AnimatedSkillCard> createState() => _AnimatedSkillCardState();
+}
+
+class _AnimatedSkillCardState extends State<_AnimatedSkillCard>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _barAnimation;
+  late final Animation<double> _percentFadeAnimation;
+  bool _hasAnimated = false;
+  late final Key _visibilityKey;
+
+  @override
+  void initState() {
+    super.initState();
+    _visibilityKey = UniqueKey();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+    _barAnimation = Tween<double>(begin: 0.0, end: widget.skill.percentage / 100.0)
+        .animate(CurvedAnimation(
+      parent: _controller,
+      curve: const Interval(0.0, 0.75, curve: Curves.easeOutCubic),
+    ));
+    _percentFadeAnimation = CurvedAnimation(
+      parent: _controller,
+      curve: const Interval(0.6, 1.0, curve: Curves.easeIn),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _onVisibilityChanged(VisibilityInfo info) {
+    if (_hasAnimated) return;
+    if (info.visibleFraction > 0.3) {
+      _hasAnimated = true;
+      if (mounted) _controller.forward();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return VisibilityDetector(
+      key: _visibilityKey,
+      onVisibilityChanged: _onVisibilityChanged,
+      child: GlassCard(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        borderRadius: AppDecorations.radiusXl,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                Container(
+                  width: 32,
+                  height: 32,
+                  decoration: BoxDecoration(
+                    color: widget.accentColor.withValues(alpha: 0.08),
+                    borderRadius: AppDecorations.radiusSm,
+                    border: Border.all(
+                      color: widget.accentColor.withValues(alpha: 0.2),
                     ),
                   ),
-                );
-              },
+                  child: Center(
+                    child: Text(
+                      widget.skill.iconGlyph,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    widget.skill.name,
+                    style: TextStyle(
+                      fontFamily: AppTypography.fontPrimary,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.textWhite,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
             ),
-          ),
-          const SizedBox(height: 3),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Text(
-              "${skill.percentage}%",
-              style: const TextStyle(
-                fontFamily: AppTypography.fontMono,
-                fontSize: 11,
-                color: Color(0x59E8EDF5),
+            const SizedBox(height: 10),
+            // Animated progress bar
+            Container(
+              height: 3,
+              decoration: BoxDecoration(
+                color: const Color(0x12FFFFFF),
+                borderRadius: BorderRadius.circular(2),
+              ),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return AnimatedBuilder(
+                    animation: _barAnimation,
+                    builder: (context, child) {
+                      return Align(
+                        alignment: Alignment.centerLeft,
+                        child: Container(
+                          width: constraints.maxWidth * _barAnimation.value,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                widget.accentColor,
+                                widget.accentColor.withValues(alpha: 0.67),
+                              ],
+                            ),
+                            borderRadius: BorderRadius.circular(2),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 3),
+            // Animated percentage text
+            AnimatedBuilder(
+              animation: _percentFadeAnimation,
+              builder: (context, child) {
+                return Opacity(
+                  opacity: _percentFadeAnimation.value,
+                  child: child,
+                );
+              },
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  "${widget.skill.percentage}%",
+                  style: const TextStyle(
+                    fontFamily: AppTypography.fontMono,
+                    fontSize: 11,
+                    color: Color(0x59E8EDF5),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

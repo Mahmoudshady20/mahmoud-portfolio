@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mahmoud_portfolio/core/animations/animated_counter.dart';
+import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
+import 'package:mahmoud_portfolio/core/animations/stagger_animation.dart';
 import 'package:mahmoud_portfolio/core/di/injection_container.dart';
 import 'package:mahmoud_portfolio/core/responsive/breakpoints.dart';
 import 'package:mahmoud_portfolio/core/responsive/responsive_builder.dart';
@@ -56,7 +59,11 @@ class StatsSection extends StatelessWidget {
                 ),
                 itemBuilder: (context, index) {
                   final stat = stats[index];
-                  return _buildStatCard(stat, isMobile);
+                  return ScrollReveal(
+                    delay: staggerDelay(index, interval: const Duration(milliseconds: 60)),
+                    offsetY: 20,
+                    child: _buildStatCard(stat, isMobile),
+                  );
                 },
               ),
             ),
@@ -81,8 +88,8 @@ class StatsSection extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 6),
-          Text(
-            stat.value,
+          AnimatedCounter(
+            value: stat.value,
             style: AppTypography.statNumber.copyWith(
               fontSize: isMobile ? 22 : 24,
             ),

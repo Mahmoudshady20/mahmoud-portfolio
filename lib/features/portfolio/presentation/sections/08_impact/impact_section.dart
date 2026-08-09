@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mahmoud_portfolio/core/animations/animated_counter.dart';
+import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
+import 'package:mahmoud_portfolio/core/animations/stagger_animation.dart';
 import 'package:mahmoud_portfolio/core/constants/app_strings.dart';
 import 'package:mahmoud_portfolio/core/di/injection_container.dart';
 import 'package:mahmoud_portfolio/core/responsive/breakpoints.dart';
@@ -66,7 +69,11 @@ class ImpactSection extends StatelessWidget {
                     ),
                     itemBuilder: (context, index) {
                       final stat = impactStats[index];
-                      return _buildImpactCard(stat, isMobile);
+                      return ScrollReveal(
+                        delay: staggerDelay(index, interval: const Duration(milliseconds: 60)),
+                        offsetY: 20,
+                        child: _buildImpactCard(stat, isMobile),
+                      );
                     },
                   ),
                 ],
@@ -88,8 +95,8 @@ class ImpactSection extends StatelessWidget {
           ShaderMask(
             shaderCallback: (bounds) =>
                 AppGradients.heroHighlightBluePurple.createShader(bounds),
-            child: Text(
-              stat.value,
+            child: AnimatedCounter(
+              value: stat.value,
               style: TextStyle(
                 fontFamily: AppTypography.fontPrimary,
                 fontSize: isMobile ? 26 : 30,
@@ -97,6 +104,7 @@ class ImpactSection extends StatelessWidget {
                 color: Colors.white,
               ),
               textAlign: TextAlign.center,
+              duration: const Duration(milliseconds: 900),
             ),
           ),
           const SizedBox(height: 6),

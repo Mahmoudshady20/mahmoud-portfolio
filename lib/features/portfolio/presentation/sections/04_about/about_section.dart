@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
+import 'package:mahmoud_portfolio/core/animations/stagger_animation.dart';
 import 'package:mahmoud_portfolio/core/constants/app_strings.dart';
 import 'package:mahmoud_portfolio/core/di/injection_container.dart';
 import 'package:mahmoud_portfolio/core/responsive/breakpoints.dart';
@@ -34,14 +36,28 @@ class AboutSection extends StatelessWidget {
                 ? Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(flex: 10, child: _buildCodeMockupCard()),
+                      Expanded(
+                        flex: 10,
+                        child: ScrollReveal(
+                          offsetX: -25,
+                          offsetY: 0,
+                          duration: const Duration(milliseconds: 500),
+                          child: _buildCodeMockupCard(),
+                        ),
+                      ),
                       const SizedBox(width: 80),
                       Expanded(
                         flex: 12,
-                        child: _buildAboutTextContent(
-                          aboutSkills,
-                          isDesktop,
-                          isMobile,
+                        child: ScrollReveal(
+                          offsetX: 25,
+                          offsetY: 0,
+                          duration: const Duration(milliseconds: 500),
+                          delay: const Duration(milliseconds: 100),
+                          child: _buildAboutTextContent(
+                            aboutSkills,
+                            isDesktop,
+                            isMobile,
+                          ),
                         ),
                       ),
                     ],
@@ -49,9 +65,14 @@ class AboutSection extends StatelessWidget {
                 : Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      _buildAboutTextContent(aboutSkills, isDesktop, isMobile),
+                      ScrollReveal(
+                        child: _buildAboutTextContent(aboutSkills, isDesktop, isMobile),
+                      ),
                       const SizedBox(height: 48),
-                      Center(child: _buildCodeMockupCard()),
+                      ScrollReveal(
+                        delay: const Duration(milliseconds: 100),
+                        child: Center(child: _buildCodeMockupCard()),
+                      ),
                     ],
                   ),
           ),
@@ -243,23 +264,28 @@ class AboutSection extends StatelessWidget {
             childAspectRatio: isMobile ? 3.0 : 3.6,
           ),
           itemBuilder: (context, index) {
-            return Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                color: AppColors.glassSurface,
-                borderRadius: AppDecorations.radiusSm,
-                border: Border.all(color: AppColors.borderSubtle),
-              ),
-              child: Text(
-                skills[index],
-                style: const TextStyle(
-                  fontFamily: AppTypography.fontMono,
-                  fontSize: 12,
-                  color: Color(0x99E8EDF5),
+            return ScrollReveal(
+              delay: staggerDelay(index, interval: const Duration(milliseconds: 40)),
+              offsetY: 14,
+              duration: const Duration(milliseconds: 300),
+              child: Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: AppColors.glassSurface,
+                  borderRadius: AppDecorations.radiusSm,
+                  border: Border.all(color: AppColors.borderSubtle),
                 ),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+                child: Text(
+                  skills[index],
+                  style: const TextStyle(
+                    fontFamily: AppTypography.fontMono,
+                    fontSize: 12,
+                    color: Color(0x99E8EDF5),
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             );
           },

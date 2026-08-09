@@ -44,49 +44,69 @@ class _PortfolioPageState extends State<PortfolioPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 70),
-                  SizedBox(
-                    key: navCubit.sectionKeys['home'],
-                    width: double.infinity,
-                    child: const HeroSection(),
+                  RepaintBoundary(
+                    child: SizedBox(
+                      key: navCubit.sectionKeys['home'],
+                      width: double.infinity,
+                      child: const HeroSection(),
+                    ),
                   ),
-                  const SizedBox(width: double.infinity, child: StatsSection()),
-                  SizedBox(
-                    key: navCubit.sectionKeys['about'],
-                    width: double.infinity,
-                    child: const AboutSection(),
+                  const RepaintBoundary(
+                    child: SizedBox(width: double.infinity, child: StatsSection()),
                   ),
-                  SizedBox(
-                    key: navCubit.sectionKeys['experience'],
-                    width: double.infinity,
-                    child: const ExperienceSection(),
+                  RepaintBoundary(
+                    child: SizedBox(
+                      key: navCubit.sectionKeys['about'],
+                      width: double.infinity,
+                      child: const AboutSection(),
+                    ),
                   ),
-                  SizedBox(
-                    key: navCubit.sectionKeys['skills'],
-                    width: double.infinity,
-                    child: const SkillsSection(),
+                  RepaintBoundary(
+                    child: SizedBox(
+                      key: navCubit.sectionKeys['experience'],
+                      width: double.infinity,
+                      child: const ExperienceSection(),
+                    ),
                   ),
-                  SizedBox(
-                    key: navCubit.sectionKeys['projects'],
-                    width: double.infinity,
-                    child: const ProjectsSection(),
+                  RepaintBoundary(
+                    child: SizedBox(
+                      key: navCubit.sectionKeys['skills'],
+                      width: double.infinity,
+                      child: const SkillsSection(),
+                    ),
                   ),
-                  const SizedBox(
-                    width: double.infinity,
-                    child: ImpactSection(),
+                  RepaintBoundary(
+                    child: SizedBox(
+                      key: navCubit.sectionKeys['projects'],
+                      width: double.infinity,
+                      child: const ProjectsSection(),
+                    ),
                   ),
-                  SizedBox(
-                    key: navCubit.sectionKeys['certificates'],
-                    width: double.infinity,
-                    child: const CertificatesSection(),
+                  const RepaintBoundary(
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: ImpactSection(),
+                    ),
                   ),
-                  SizedBox(
-                    key: navCubit.sectionKeys['contact'],
-                    width: double.infinity,
-                    child: const ContactSection(),
+                  RepaintBoundary(
+                    child: SizedBox(
+                      key: navCubit.sectionKeys['certificates'],
+                      width: double.infinity,
+                      child: const CertificatesSection(),
+                    ),
                   ),
-                  const SizedBox(
-                    width: double.infinity,
-                    child: FooterSection(),
+                  RepaintBoundary(
+                    child: SizedBox(
+                      key: navCubit.sectionKeys['contact'],
+                      width: double.infinity,
+                      child: const ContactSection(),
+                    ),
+                  ),
+                  const RepaintBoundary(
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: FooterSection(),
+                    ),
                   ),
                 ],
               ),

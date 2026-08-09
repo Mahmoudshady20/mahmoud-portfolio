@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
+import 'package:mahmoud_portfolio/core/animations/stagger_animation.dart';
 import 'package:mahmoud_portfolio/core/constants/app_constants.dart';
 import 'package:mahmoud_portfolio/core/constants/app_strings.dart';
 import 'package:mahmoud_portfolio/core/responsive/breakpoints.dart';
@@ -41,81 +43,91 @@ class ContactSection extends StatelessWidget {
                 ),
                 const SizedBox(height: 56),
 
-                // Contact Cards Grid / Wrap
-                Wrap(
-                  spacing: 16,
-                  runSpacing: 16,
-                  alignment: WrapAlignment.center,
-                  children: [
-                    _buildContactCard(
-                      icon: Icons.email_rounded,
-                      title: "Email",
-                      value: AppConstants.email,
-                      isMobile: isMobile,
-                      onTap: () => UrlHelper.sendEmail(AppConstants.email),
-                    ),
-                    _buildContactCard(
-                      icon: Icons.code_rounded,
-                      title: "GitHub",
-                      value: "github.com/mahmoudshady20",
-                      isMobile: isMobile,
-                      onTap: () => UrlHelper.openUrl(AppConstants.githubUrl),
-                    ),
-                    _buildContactCard(
-                      icon: Icons.work_rounded,
-                      title: "LinkedIn",
-                      value: "linkedin.com/in/mahmoudshady",
-                      isMobile: isMobile,
-                      onTap: () => UrlHelper.openUrl(AppConstants.linkedinUrl),
-                    ),
-                    _buildContactCard(
-                      icon: Icons.location_on_rounded,
-                      title: "Location",
-                      value: AppConstants.location,
-                      isMobile: isMobile,
-                      onTap: null,
-                    ),
-                  ],
+                // Contact Cards with stagger
+                ScrollReveal(
+                  delay: const Duration(milliseconds: 100),
+                  child: Wrap(
+                    spacing: 16,
+                    runSpacing: 16,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      _buildContactCard(
+                        icon: Icons.email_rounded,
+                        title: "Email",
+                        value: AppConstants.email,
+                        isMobile: isMobile,
+                        onTap: () => UrlHelper.sendEmail(AppConstants.email),
+                        delay: 0,
+                      ),
+                      _buildContactCard(
+                        icon: Icons.code_rounded,
+                        title: "GitHub",
+                        value: "github.com/mahmoudshady20",
+                        isMobile: isMobile,
+                        onTap: () => UrlHelper.openUrl(AppConstants.githubUrl),
+                        delay: 1,
+                      ),
+                      _buildContactCard(
+                        icon: Icons.work_rounded,
+                        title: "LinkedIn",
+                        value: "linkedin.com/in/mahmoudshady",
+                        isMobile: isMobile,
+                        onTap: () => UrlHelper.openUrl(AppConstants.linkedinUrl),
+                        delay: 2,
+                      ),
+                      _buildContactCard(
+                        icon: Icons.location_on_rounded,
+                        title: "Location",
+                        value: AppConstants.location,
+                        isMobile: isMobile,
+                        onTap: null,
+                        delay: 3,
+                      ),
+                    ],
+                  ),
                 ),
                 const SizedBox(height: 48),
 
                 // Direct Action Buttons
-                Wrap(
-                  spacing: 16,
-                  runSpacing: 12,
-                  alignment: WrapAlignment.center,
-                  children: [
-                    AppGradientButton(
-                      text: "Send Message / Email",
-                      icon: const Icon(
-                        Icons.send_rounded,
-                        size: 16,
-                        color: Colors.white,
+                ScrollReveal(
+                  delay: const Duration(milliseconds: 300),
+                  child: Wrap(
+                    spacing: 16,
+                    runSpacing: 12,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      AppGradientButton(
+                        text: "Send Message / Email",
+                        icon: const Icon(
+                          Icons.send_rounded,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 14,
+                        ),
+                        onPressed: () => UrlHelper.sendEmail(
+                          AppConstants.email,
+                          subject: "Flutter Project Inquiry",
+                        ),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 14,
+                      AppOutlineButton(
+                        text: "Download Resume",
+                        icon: const Icon(
+                          Icons.download_rounded,
+                          size: 16,
+                          color: AppColors.primary,
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 14,
+                        ),
+                        onPressed: () =>
+                            UrlHelper.openUrl(AppConstants.cvDownloadUrl),
                       ),
-                      onPressed: () => UrlHelper.sendEmail(
-                        AppConstants.email,
-                        subject: "Flutter Project Inquiry",
-                      ),
-                    ),
-                    AppOutlineButton(
-                      text: "Download Resume",
-                      icon: const Icon(
-                        Icons.download_rounded,
-                        size: 16,
-                        color: AppColors.primary,
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 14,
-                      ),
-                      onPressed: () =>
-                          UrlHelper.openUrl(AppConstants.cvDownloadUrl),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -130,62 +142,68 @@ class ContactSection extends StatelessWidget {
     required String title,
     required String value,
     required bool isMobile,
+    required int delay,
     VoidCallback? onTap,
   }) {
-    return GlassCard(
-      padding: EdgeInsets.symmetric(
-        horizontal: isMobile ? 16 : 20,
-        vertical: 16,
-      ),
-      borderRadius: AppDecorations.radiusXl,
-      onTap: onTap,
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxWidth: isMobile ? 280 : 320),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: AppColors.primary.withValues(alpha: 0.1),
-                borderRadius: AppDecorations.radiusSm,
-                border: Border.all(
-                  color: AppColors.primary.withValues(alpha: 0.2),
+    return ScrollReveal(
+      delay: staggerDelay(delay, interval: const Duration(milliseconds: 60)),
+      offsetY: 14,
+      duration: const Duration(milliseconds: 350),
+      child: GlassCard(
+        padding: EdgeInsets.symmetric(
+          horizontal: isMobile ? 16 : 20,
+          vertical: 16,
+        ),
+        borderRadius: AppDecorations.radiusXl,
+        onTap: onTap,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: isMobile ? 280 : 320),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: AppColors.primary.withValues(alpha: 0.1),
+                  borderRadius: AppDecorations.radiusSm,
+                  border: Border.all(
+                    color: AppColors.primary.withValues(alpha: 0.2),
+                  ),
+                ),
+                child: Icon(icon, color: AppColors.primary, size: 20),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      title,
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontMono,
+                        fontSize: 12,
+                        color: const Color(0x73E8EDF5),
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      value,
+                      style: TextStyle(
+                        fontFamily: AppTypography.fontPrimary,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textWhite,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
               ),
-              child: Icon(icon, color: AppColors.primary, size: 20),
-            ),
-            const SizedBox(width: 14),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontFamily: AppTypography.fontMono,
-                      fontSize: 12,
-                      color: const Color(0x73E8EDF5),
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    value,
-                    style: TextStyle(
-                      fontFamily: AppTypography.fontPrimary,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textWhite,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

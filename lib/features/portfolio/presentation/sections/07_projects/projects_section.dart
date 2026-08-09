@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
+import 'package:mahmoud_portfolio/core/animations/stagger_animation.dart';
 import 'package:mahmoud_portfolio/core/constants/app_strings.dart';
 import 'package:mahmoud_portfolio/core/di/injection_container.dart';
 import 'package:mahmoud_portfolio/core/responsive/breakpoints.dart';
@@ -51,7 +53,12 @@ class ProjectsSection extends StatelessWidget {
                   itemBuilder: (context, index) {
                     final project = projects[index];
                     final isReversed = index.isOdd;
-                    return _buildProjectCard(project, isReversed, isMobile);
+                    return ScrollReveal(
+                      delay: staggerDelay(index, interval: const Duration(milliseconds: 100)),
+                      duration: const Duration(milliseconds: 500),
+                      offsetY: 30,
+                      child: _buildProjectCard(project, isReversed, isMobile),
+                    );
                   },
                 ),
               ],
@@ -110,7 +117,7 @@ class ProjectsSection extends StatelessWidget {
         ),
         const SizedBox(height: 20),
 
-        // Bullet Features using Text.rich to avoid horizontal flex overflow
+        // Bullet Features
         Wrap(
           spacing: 16,
           runSpacing: 10,

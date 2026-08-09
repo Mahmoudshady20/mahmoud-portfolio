@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
 import 'package:mahmoud_portfolio/core/responsive/responsive_builder.dart';
 import 'package:mahmoud_portfolio/core/theme/app_colors.dart';
 import 'package:mahmoud_portfolio/core/theme/app_gradients.dart';
@@ -35,48 +36,64 @@ class SectionHeader extends StatelessWidget {
           crossAxisAlignment:
               isCentered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
           children: [
-            Text(
-              tag,
-              style: AppTypography.sectionTag.copyWith(
-                color: tagColor ?? AppColors.primary,
+            // Tag with slight delay
+            ScrollReveal(
+              offsetY: 14,
+              duration: const Duration(milliseconds: 350),
+              child: Text(
+                tag,
+                style: AppTypography.sectionTag.copyWith(
+                  color: tagColor ?? AppColors.primary,
+                ),
+                textAlign: isCentered ? TextAlign.center : TextAlign.start,
               ),
-              textAlign: isCentered ? TextAlign.center : TextAlign.start,
             ),
             const SizedBox(height: 12),
-            RichText(
-              textAlign: isCentered ? TextAlign.center : TextAlign.start,
-              text: TextSpan(
-                style: titleStyle,
-                children: [
-                  TextSpan(text: titlePrefix),
-                  WidgetSpan(
-                    alignment: PlaceholderAlignment.baseline,
-                    baseline: TextBaseline.alphabetic,
-                    child: ShaderMask(
-                      shaderCallback: (bounds) =>
-                          (highlightGradient ?? AppGradients.sectionHighlight)
-                              .createShader(bounds),
-                      child: Text(
-                        titleHighlight,
-                        style: titleStyle.copyWith(
-                          color: Colors.white,
+            // Title with stagger
+            ScrollReveal(
+              delay: const Duration(milliseconds: 60),
+              offsetY: 14,
+              duration: const Duration(milliseconds: 350),
+              child: RichText(
+                textAlign: isCentered ? TextAlign.center : TextAlign.start,
+                text: TextSpan(
+                  style: titleStyle,
+                  children: [
+                    TextSpan(text: titlePrefix),
+                    WidgetSpan(
+                      alignment: PlaceholderAlignment.baseline,
+                      baseline: TextBaseline.alphabetic,
+                      child: ShaderMask(
+                        shaderCallback: (bounds) =>
+                            (highlightGradient ?? AppGradients.sectionHighlight)
+                                .createShader(bounds),
+                        child: Text(
+                          titleHighlight,
+                          style: titleStyle.copyWith(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             if (subtitle != null) ...[
               const SizedBox(height: 12),
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 600),
-                child: Text(
-                  subtitle!,
-                  style: AppTypography.bodyMedium.copyWith(
-                    color: AppColors.textSubtle,
+              ScrollReveal(
+                delay: const Duration(milliseconds: 120),
+                offsetY: 10,
+                duration: const Duration(milliseconds: 350),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 600),
+                  child: Text(
+                    subtitle!,
+                    style: AppTypography.bodyMedium.copyWith(
+                      color: AppColors.textSubtle,
+                    ),
+                    textAlign: isCentered ? TextAlign.center : TextAlign.start,
                   ),
-                  textAlign: isCentered ? TextAlign.center : TextAlign.start,
                 ),
               ),
             ],

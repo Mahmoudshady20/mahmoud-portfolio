@@ -1,3 +1,7 @@
 {{flutter_js}}
 {{flutter_build_config}}
-_flutter.loader.load({config:{canvasKitBaseUrl:"canvaskit/"}});
+// Update legacy Flutter workers to the SDK's retiring worker before startup.
+_flutter.loader.load({
+  serviceWorkerSettings: {serviceWorkerVersion: {{flutter_service_worker_version}}},
+  config: {canvasKitBaseUrl: "canvaskit/"}
+});

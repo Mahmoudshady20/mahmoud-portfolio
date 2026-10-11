@@ -74,7 +74,7 @@ for x in data['projects']:
  w('web/'+path+'index.html',f'<!doctype html><html lang="en"><head>{head(x["title"]+" | Mahmoud Shady — Mobile Engineering",x["description"],base+path)}<link rel="stylesheet" href="../../public.css"><link rel="icon" href="../../favicon.png"></head><body>{nav}<main>{body}</main>{foot}</body></html>')
 w('web/robots.txt',f'User-agent: *\nAllow: /\nSitemap: {base}sitemap.xml\n')
 w('web/sitemap.xml','<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+''.join('<url><loc>'+base+path+'</loc></url>' for path in ['']+['case-studies/'+x['slug']+'/' for x in data['projects']])+'</urlset>')
-w('web/flutter_bootstrap.js','{{flutter_js}}\n{{flutter_build_config}}\n_flutter.loader.load({config:{canvasKitBaseUrl:"canvaskit/"}});\n')
+w('web/flutter_bootstrap.js', '{{flutter_js}}\n{{flutter_build_config}}\n// Update legacy Flutter workers to the SDK\'s retiring worker before startup.\n_flutter.loader.load({\n  serviceWorkerSettings: {serviceWorkerVersion: {{flutter_service_worker_version}}},\n  config: {canvasKitBaseUrl: "canvaskit/"}\n});\n')
 manifest=json.loads((R/'web/manifest.json').read_text());manifest.update(name='Mahmoud Shady | Software Engineer',short_name='Mahmoud Shady',background_color='#f6f4ef',theme_color='#694d91',description='Software and Mobile Application Engineering portfolio',orientation='any');w('web/manifest.json',json.dumps(manifest,indent=2))
 # Original typographic brand assets; no confidential imagery or remote asset dependency.
 F=font_pair[0].parent

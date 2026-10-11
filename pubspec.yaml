@@ -28,8 +28,6 @@ flutter:
   assets:
     - assets/data/
     - assets/fonts/
-    - assets/images/
-    - assets/icons/
 
   fonts:
     - family: SpaceGrotesk

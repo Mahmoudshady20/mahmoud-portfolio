@@ -1,5 +1,5 @@
 name: mahmoud_portfolio
-description: "Mahmoud Shady - Flutter Developer Portfolio"
+description: "Mahmoud Shady - Software and Mobile Application Engineer Portfolio"
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -26,6 +26,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/data/
     - assets/fonts/
     - assets/images/
     - assets/icons/

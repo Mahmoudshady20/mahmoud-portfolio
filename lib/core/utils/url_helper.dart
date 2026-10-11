@@ -1,32 +1,32 @@
 import 'package:url_launcher/url_launcher.dart';
 
 abstract class UrlHelper {
-  static Future<bool> openUrl(String urlString) async {
+  static Future<bool> openUrl(String value) async {
     try {
-      final uri = Uri.parse(urlString);
-      if (await canLaunchUrl(uri)) {
-        return await launchUrl(uri, mode: LaunchMode.externalApplication);
-      }
-      return false;
-    } catch (_) {
-      return false;
-    }
-  }
-
-  static Future<bool> sendEmail(String email, {String? subject, String? body}) async {
-    try {
-      final Map<String, String> queryParams = {};
-      if (subject != null) queryParams['subject'] = subject;
-      if (body != null) queryParams['body'] = body;
-
-      final Uri emailLaunchUri = Uri(
-        scheme: 'mailto',
-        path: email,
-        queryParameters: queryParams.isNotEmpty ? queryParams : null,
+      final uri = Uri.base.resolve(value);
+      if (!['https', 'http', 'mailto'].contains(uri.scheme)) return false;
+      return await launchUrl(
+        uri,
+        mode: LaunchMode.platformDefault,
+        webOnlyWindowName: '_blank',
       );
-      return await launchUrl(emailLaunchUri);
     } catch (_) {
       return false;
     }
   }
+
+  static Future<bool> sendEmail(
+    String email, {
+    String? subject,
+    String? body,
+  }) => openUrl(
+    Uri(
+      scheme: 'mailto',
+      path: email,
+      queryParameters: {
+        'subject': ?subject,
+        'body': ?body,
+      },
+    ).toString(),
+  );
 }

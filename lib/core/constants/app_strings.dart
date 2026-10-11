@@ -5,7 +5,7 @@ abstract class AppStrings {
   static const String navExperience = "Experience";
   static const String navProjects = "Projects";
   static const String navSkills = "Skills";
-  static const String navCertificates = "Certificates";
+  static const String navEducation = "Education";
   static const String navContact = "Contact";
 
   // Actions
@@ -19,14 +19,14 @@ abstract class AppStrings {
   static const String appStore = " App Store";
 
   // Hero Section
-  static const String heroTag = "Flutter Developer";
+  static const String heroTag = "Software Engineer";
   static const String heroTitleLine1 = "Mahmoud";
   static const String heroTitleLine2 = "Shady";
   static const String heroHighlight1 = "Create Beautiful";
   static const String heroHighlight2 = "Cross-Platform";
   static const String heroHighlight3 = "Experiences.";
   static const String heroBio =
-      "Flutter Developer specializing in scalable mobile applications using Clean Architecture, Firebase, SOLID principles, modern UI/UX, and high-performance applications.";
+      "Software Engineer specializing in scalable mobile applications using Clean Architecture, Firebase, SOLID principles, modern UI/UX, and high-performance applications.";
 
   // Section Tags
   static const String tagAbout = "";
@@ -34,23 +34,24 @@ abstract class AppStrings {
   static const String tagSkills = "";
   static const String tagProjects = "";
   static const String tagImpact = "";
-  static const String tagCertificates = "";
+  static const String tagEducation = "";
+  static const String tagCertificates = tagEducation;
   static const String tagTestimonials = "";
   static const String tagContact = "";
 
   // Section Titles & Subtitles
   static const String aboutHeadline =
-      "Crafting elegant code\none widget at a time.";
+      "Engineering complete\nmobile applications.";
   static const String aboutParagraph1 =
-      "I'm a passionate Flutter Developer based in Cairo, dedicated to building responsive, fluid, and robust mobile applications that users love.";
+      "I'm a Software Engineer based in Cairo, specializing in complete mobile application development for iOS and Android.";
   static const String aboutParagraph2 =
-      "My expertise spans Flutter & Dart, Firebase & Supabase, State Management (Bloc, Cubit, Provider), Clean Architecture, and RESTful APIs.";
+      "My expertise spans Flutter & Dart, Firebase, State Management (Bloc, Cubit, Provider), Clean Architecture, and RESTful APIs.";
 
   static const String experienceTitlePrefix = "My Professional ";
   static const String experienceTitleHighlight = "Journey";
 
   static const String skillsTitlePrefix = "Technical ";
-  static const String skillsTitleHighlight = "Arsenal";
+  static const String skillsTitleHighlight = "Expertise";
 
   static const String projectsTitlePrefix = "Featured ";
   static const String projectsTitleHighlight = "Work";
@@ -60,8 +61,8 @@ abstract class AppStrings {
   static const String impactTitlePrefix = "By the ";
   static const String impactTitleHighlight = "Numbers";
 
-  static const String certificatesTitlePrefix = "Credentials & ";
-  static const String certificatesTitleHighlight = "Certifications";
+  static const String certificatesTitlePrefix = "Education & ";
+  static const String certificatesTitleHighlight = "Training";
 
   static const String testimonialsTitlePrefix = "What People ";
   static const String testimonialsTitleHighlight = "Say";

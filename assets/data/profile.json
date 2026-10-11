@@ -1,0 +1,347 @@
+{
+  "name": "Mahmoud Shady",
+  "role": "Software Engineer",
+  "specialization": "Mobile Application Engineering",
+  "location": "Cairo, Egypt",
+  "email": "mahmoud4ady@gmail.com",
+  "linkedin": "https://www.linkedin.com/in/mahmoud-shady-9b8ab0229/",
+  "github": "https://github.com/Mahmoudshady20",
+  "canonical": "https://mahmoudshady20.github.io/mahmoud-portfolio/",
+  "about": "I’m a Software Engineer specializing in mobile application development. I build complete applications: turning business requirements into a maintainable architecture, implementing the product experience, integrating services, and taking the mobile application through testing and delivery.\n\nI take substantial responsibility for the mobile side of a product. Across my projects, I have personally handled the vast majority of mobile development, including architecture, implementation, integrations, debugging, and delivery. I can independently carry substantial development work while collaborating with designers, backend engineers, and other developers where the product requires it.\n\nFlutter and Dart are my primary tools for building iOS and Android applications. My experience spans education, nutrition, women’s health, e-commerce, and medication reminders. I’ve built applications from scratch and maintained published products, making engineering decisions about structure, state, data, navigation, and reusable UI as requirements evolve.\n\nThe challenging parts often sit between features: keeping account state consistent, handling unreliable connectivity, connecting subscription access to the user experience, and making notifications and shared links open the right destination. I design for those interactions, investigate failures across the application, and use focused tests to check critical behavior. Maintainability, reliability, responsive design, and performance guide how I implement and improve the mobile codebase.\n\nRejeemat is one example of that execution: I personally handled the vast majority of its mobile development, and the application was completed approximately three months after development began. I’m currently engineering Hayah, taking responsibility for its mobile architecture, development foundations, and complex application behavior. It remains under active development.\n\nI’m interested in Software Engineer, Mobile Engineer, and Flutter Engineer roles where I can own substantial mobile development and deliver applications that are useful to users and practical to maintain.",
+  "experience": [
+    {
+      "number": "01",
+      "role": "Software Engineer | Mobile Developer",
+      "company": "Tara Digital | Full Stack Digital Solutions",
+      "period": "July 2025–present",
+      "description": "• Take substantial responsibility for building and maintaining complete Flutter mobile applications across education, nutrition, and women’s health products, from requirements and architecture through implementation, integration, testing, and delivery.\n• Make mobile engineering decisions about application structure, state management, data flow, navigation, and reusable UI to keep growing codebases maintainable.\n• Personally handled the vast majority of Rejeemat’s mobile development; the application was completed approximately three months after development began, followed by ongoing improvements and maintenance.\n• Engineer connected application behavior across authentication, account sessions, subscription access, notifications, deep links, and offline data, resolving issues that span multiple features and services.\n• Build responsive iOS and Android experiences and improve application reliability through debugging, focused tests, and platform integration and release preparation.\n• Coordinate with design, backend, and other engineering contributors to translate product requirements into a coherent mobile application.",
+      "technologies": []
+    },
+    {
+      "number": "02",
+      "role": "Flutter Developer",
+      "company": "Upwork",
+      "period": "September 2021–October 2025",
+      "description": "• Built Flutter mobile applications through project-based engagements, taking substantial responsibility for translating requirements into working application functionality and delivery.\n• Designed and implemented application structure, state management, API-connected workflows, and persistent local data, alongside the user interface.\n• Independently handled substantial mobile development, investigated defects across the application, and resolved integration and usability issues.\n• Maintained and extended existing applications, organizing reusable code so new requirements could be implemented without unnecessary duplication.\n• Managed technical execution of assigned mobile work from implementation through debugging and delivery, coordinating with clients and other contributors where required.",
+      "technologies": []
+    },
+    {
+      "number": "03",
+      "role": "Software Engineer| Mobile Developer",
+      "company": "Phlera Ltd.",
+      "period": "December 2024–July 2025",
+      "description": "• Engineered Flutter mobile applications for e-commerce and business use cases, taking substantial responsibility for application implementation and integration with backend services.\n• Translated business requirements into complete mobile workflows, connecting account behavior, product discovery, shopping interactions, and application data.\n• Designed maintainable application structure and state-management boundaries, applying Clean Architecture where used and keeping UI responsibilities separate from data access.\n• Integrated REST APIs, handled loading and failure states, and investigated defects across the mobile application to improve reliability and usability.\n• Maintained and extended application functionality as requirements evolved, collaborating with backend and distributed development teams to align the mobile experience with the product.",
+      "technologies": []
+    },
+    {
+      "number": "04",
+      "role": "Flutter Developer",
+      "company": "Shbbak Solution Group",
+      "period": "October 2023–October 2024",
+      "description": "• Developed Flutter application functionality in a professional training environment, implementing Dart logic, API-connected behavior, and user-facing workflows.\n• Took responsibility for assigned mobile development tasks from understanding requirements through implementation, debugging, and review.\n• Solved practical problems involving UI, state management, and backend data, building a foundation for broader application engineering responsibilities.\n• Collaborated with the development team and applied review feedback to strengthen code organization, maintainability, and implementation quality.",
+      "technologies": []
+    }
+  ],
+  "projects": [
+    {
+      "number": "01",
+      "slug": "hayah",
+      "title": "Hayah",
+      "category": "Community & content discovery",
+      "status": "In development",
+      "heading": "A mobile platform, built on a deliberate foundation.",
+      "description": "A substantial application connecting content discovery, community interactions, and account-based experiences.",
+      "ownership": "I am actively engineering Hayah, a substantial mobile application with content discovery, community interactions, and account-based experiences. I take responsibility for its mobile architecture, development foundations, and the implementation of complex application behavior.",
+      "features": [
+        "Designed and implemented a modular architecture with clear responsibilities for presentation, application state, data access, and external services, creating a maintainable foundation for continued development.",
+        "Built authentication and account-session foundations, integrating Firebase/social sign-in with backend services, secure local persistence, profile completion, and guest access rules.",
+        "Engineered feed, search, and social interactions, handling pagination, changing account state, repeated actions, and late network responses so asynchronous behavior remains consistent.",
+        "Built a reusable design system and translated Figma designs into responsive Arabic/RTL interfaces with custom animation and consistent loading, error, and empty states.",
+        "Added focused unit and widget tests for critical account, navigation, interaction, and presentation behavior."
+      ],
+      "challenge": "Architecture, identity, navigation, and asynchronous data must remain coherent as the application grows.",
+      "outcome": "Mobile architecture and development foundations; further features and production validation are in progress.",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "Clean Architecture",
+        "Flutter Modular",
+        "Cubit",
+        "Dio / Retrofit",
+        "Firebase"
+      ],
+      "color": 4292793069,
+      "visual": [
+        "Modular foundations",
+        "Account & session safety",
+        "Feed & search experiences"
+      ]
+    },
+    {
+      "number": "02",
+      "slug": "rejeemat",
+      "title": "Rejeemat",
+      "category": "Nutrition & meal planning",
+      "status": "Delivered · maintained",
+      "heading": "From requirements to a complete mobile application.",
+      "description": "Recipes, meal planning, account experiences, and daily reminders in one connected mobile product.",
+      "ownership": "Personally handled the vast majority of mobile development for Rejeemat, a nutrition and meal-planning application completed approximately three months after development began. My responsibility spanned mobile architecture, application implementation, service integrations, debugging, and delivery, followed by continued maintenance and improvements.",
+      "features": [
+        "Built a layered Flutter application connecting recipes, meal planning, account data, and everyday reminders, using BLoC/Cubit and clear boundaries between application state and backend services.",
+        "Implemented authentication, guest access, profile completion, and persistent account behavior to connect the user journey across the application.",
+        "Engineered recipe sharing and deep links that handle app launch, in-app navigation, and authentication before opening the intended content.",
+        "Integrated push notifications and configurable meal, water, and exercise reminders with persistent preferences and timezone-aware scheduling.",
+        "Tested critical deep-link and reminder behavior and resolved issues across account, upload, and navigation flows."
+      ],
+      "challenge": "Shared recipes, account state, notifications, and local reminders need to reach the right destination, even across app launches.",
+      "outcome": "Initial application completed approximately three months after development began. I personally handled the vast majority of mobile development.",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "BLoC / Cubit",
+        "REST APIs",
+        "Firebase",
+        "Deep linking"
+      ],
+      "color": 4293909434,
+      "visual": [
+        "Recipes & meal planning",
+        "Sharing & deep links",
+        "Reminders & accounts"
+      ]
+    },
+    {
+      "number": "03",
+      "slug": "rosy-calc",
+      "title": "Rosy Calc",
+      "category": "Women’s health & wellness",
+      "status": "Published application",
+      "heading": "Engineering for a product people use every day.",
+      "description": "A published women’s health application bringing together cycle tracking, health content, and community experiences.",
+      "ownership": "Engineered and maintained the Flutter mobile implementation of Rosy Calc, a published women’s health application combining cycle tracking, health content, and community experiences. I personally handled the vast majority of its mobile application development, spanning implementation, service integration, debugging, and delivery within a shared codebase.",
+      "features": [
+        "Built and maintained connected mobile workflows across accounts, content, and community, coordinating application state, backend data, navigation, and reusable UI.",
+        "Integrated Firebase authentication with backend account and session behavior, including token refresh and account lifecycle handling.",
+        "Implemented push and local notifications and the application behavior needed to open the right content and respond to account changes.",
+        "Engineered local caching and offline fallback for articles and the community feed so useful content remains available when connectivity fails.",
+        "Improved feed scrolling and loading presentation, investigated cross-feature defects, and handled Android/iOS platform configuration and release preparation."
+      ],
+      "challenge": "Account changes, unreliable connectivity, and platform notifications must work consistently across a shared production codebase.",
+      "outcome": "Substantial mobile development and ongoing production maintenance, alongside other contributors.",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "Firebase",
+        "REST APIs",
+        "Local caching",
+        "Notifications"
+      ],
+      "color": 4293643220,
+      "visual": [
+        "Connected health content",
+        "Offline access",
+        "Production maintenance"
+      ],
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=cc.hayah.rosycalc"
+    },
+    {
+      "number": "04",
+      "slug": "qudratuh",
+      "title": "Qudratuh",
+      "category": "Education & exam preparation",
+      "status": "Published application",
+      "heading": "A complete learning experience, across devices.",
+      "description": "An aptitude-exam preparation application for Saudi students combining practice, assessments, review, progress, and subscription access.",
+      "ownership": "Engineered the Flutter mobile application for Qudratuh, an aptitude-exam preparation product for Saudi students combining practice, assessments, answer review, progress tracking, and subscription access. I personally handled the vast majority of its mobile development, spanning application architecture, implementation, integrations, debugging, and delivery.",
+      "features": [
+        "Built and maintained a feature-based architecture using Clean Architecture and BLoC/Cubit, keeping learning workflows, application state, and backend data organized as the product grew.",
+        "Implemented connected learning and account experiences and integrated subscription purchasing and access through RevenueCat, aligning purchase state with available application functionality.",
+        "Designed responsive phone and tablet behavior, including a split-screen assessment-review experience, with reusable components and consistent interaction patterns.",
+        "Integrated backend services, resolved application and platform issues, and added focused validation and UI tests."
+      ],
+      "challenge": "Learning workflows, purchase access, backend data, and phone/tablet layouts need to behave as one product.",
+      "outcome": "Personally handled the vast majority of mobile development across architecture, implementation, integrations, debugging, and delivery.",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "Clean Architecture",
+        "BLoC / Cubit",
+        "RevenueCat",
+        "Responsive UI"
+      ],
+      "color": 4291812840,
+      "visual": [
+        "Practice & assessment",
+        "Subscription access",
+        "Phone & tablet layouts"
+      ],
+      "appStoreUrl": "https://apps.apple.com/us/app/id6787664251"
+    },
+    {
+      "number": "05",
+      "slug": "hub-spare-parts",
+      "title": "HUB Spare Parts",
+      "category": "E-commerce marketplace",
+      "status": "Mobile marketplace",
+      "heading": "Commerce beyond the checkout.",
+      "description": "A spare-parts marketplace connecting product discovery, shopping, orders, and refund workflows.",
+      "ownership": "Built and maintained the Flutter mobile marketplace for HUB Spare Parts, connecting product discovery, shopping, and post-purchase workflows. I took responsibility for mobile implementation, API integration, debugging, and delivery work within the shared marketplace codebase.",
+      "features": [
+        "Built and maintained browsing and purchasing behavior across categories, brands, filters, cart interactions, shipping information, and order details.",
+        "Implemented connected refund-request, refund-list, and refund-detail workflows, coordinating API services, application models, state, and user-facing screens.",
+        "Organized and extended application behavior using the existing Provider-based architecture, adapting the mobile implementation to changing commerce requirements.",
+        "Resolved defects across shopping and order flows and handled application identity and Android platform updates during delivery."
+      ],
+      "challenge": "Keep browsing, cart, shipping, order details, and refunds consistent with evolving backend services.",
+      "outcome": "Built and maintained substantial mobile marketplace functionality within a shared codebase.",
+      "techStack": [
+        "Flutter",
+        "Provider",
+        "REST APIs",
+        "State management"
+      ],
+      "color": 4292141008,
+      "visual": [
+        "Discovery & shopping",
+        "Orders & shipping",
+        "Refund workflows"
+      ]
+    },
+    {
+      "number": "06",
+      "slug": "doa2k",
+      "title": "Doa2k",
+      "category": "Medication reminders",
+      "status": "Completed project",
+      "heading": "Useful software for an everyday routine.",
+      "description": "A medication-reminder application connecting persistent medication and dose records to scheduled alerts.",
+      "ownership": "Built and maintained Doa2k, a Flutter medication-reminder application that turns medication and dose records into persistent, scheduled reminders. I handled the mobile application’s implementation, local data and notification integration, debugging, and Android delivery preparation.",
+      "features": [
+        "Designed the application behavior connecting medication records, dose information, and scheduled alerts, using Provider for state management and Hive for local persistence.",
+        "Implemented timezone-aware notification scheduling and cancellation, keeping reminder behavior connected to changes in stored medication data.",
+        "Refined application organization, data models, responsive text, and the user experience as the product evolved.",
+        "Maintained dependencies and platform configuration and resolved application issues during release preparation and subsequent maintenance."
+      ],
+      "challenge": "Persist changes reliably and keep timezone-aware scheduling and cancellation connected to medication records.",
+      "outcome": "Built and maintained the mobile application, including local data, scheduled alerts, debugging, and Android delivery preparation.",
+      "techStack": [
+        "Flutter",
+        "Dart",
+        "Provider",
+        "Hive",
+        "Local notifications"
+      ],
+      "color": 4292336104,
+      "visual": [
+        "Medication records",
+        "Local persistence",
+        "Scheduled alerts"
+      ]
+    },
+    {
+      "number": "07",
+      "slug": "islami",
+      "title": "Islami",
+      "category": "Daily worship & reflection",
+      "status": "Earlier project",
+      "heading": "Content organized around daily use.",
+      "description": "An Islamic mobile application providing access to the Quran and resources for daily worship and reflection.",
+      "ownership": "Built an Islamic mobile application providing access to the Quran and resources for daily worship and reflection. This earlier project represents hands-on mobile application development focused on organizing content into a practical user experience.",
+      "features": [],
+      "challenge": "Organize content into a practical mobile user experience.",
+      "outcome": "An earlier hands-on mobile application project.",
+      "techStack": [
+        "Flutter"
+      ],
+      "color": 4292861654,
+      "visual": [
+        "Quran content",
+        "Daily worship",
+        "Mobile experience"
+      ]
+    }
+  ],
+  "expertise": [
+    {
+      "name": "Architecture & engineering",
+      "description": "Make application structure support the product. Keep responsibilities clear and code practical to extend.",
+      "technologies": [
+        "Clean Architecture",
+        "SOLID principles",
+        "Modular architecture",
+        "Dependency injection",
+        "Design patterns"
+      ]
+    },
+    {
+      "name": "Mobile application development",
+      "description": "Build complete experiences for iOS and Android, from requirements and implementation through integration and delivery.",
+      "technologies": [
+        "Flutter",
+        "Dart",
+        "BLoC / Cubit",
+        "Provider",
+        "Cross-platform development"
+      ]
+    },
+    {
+      "name": "APIs, identity & integrations",
+      "description": "Connect services to reliable application behavior, including account sessions, subscriptions, and platform events.",
+      "technologies": [
+        "REST APIs",
+        "Dio / Retrofit",
+        "Firebase Authentication",
+        "Cloud Messaging",
+        "RevenueCat",
+        "Deep linking"
+      ]
+    },
+    {
+      "name": "Data & application reliability",
+      "description": "Handle unreliable connectivity, persistent state, and asynchronous changes with deliberate data flows.",
+      "technologies": [
+        "Hive",
+        "Secure storage",
+        "SharedPreferences",
+        "Caching",
+        "Offline fallback",
+        "Error handling"
+      ]
+    },
+    {
+      "name": "UI & interaction engineering",
+      "description": "Translate design into reusable, responsive interfaces that work across devices, languages, and interaction states.",
+      "technologies": [
+        "Design systems",
+        "Figma to Flutter",
+        "Responsive layouts",
+        "Arabic / RTL",
+        "Custom animations",
+        "Accessibility"
+      ]
+    },
+    {
+      "name": "Quality & delivery",
+      "description": "Debug across the application, test critical behavior, and maintain products beyond initial completion.",
+      "technologies": [
+        "Unit & widget testing",
+        "Git / GitHub",
+        "Android / iOS release preparation",
+        "Flutter Web",
+        "GitHub Actions for web builds"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "school": "Minufiya University",
+      "degree": "Bachelor’s degree · Computer Science",
+      "period": "September 2019 – September 2023"
+    },
+    {
+      "school": "Information Technology Institute (ITI)",
+      "degree": "Android Development training",
+      "period": "February – March 2022"
+    }
+  ]
+}

@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://mahmoudshady.dev/sitemap.xml
+Sitemap: https://mahmoudshady20.github.io/mahmoud-portfolio/sitemap.xml

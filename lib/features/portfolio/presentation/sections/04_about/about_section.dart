@@ -1,325 +1,83 @@
 import 'package:flutter/material.dart';
+import 'package:mahmoud_portfolio/core/widgets/portfolio_ui.dart';
 import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
-import 'package:mahmoud_portfolio/core/animations/stagger_animation.dart';
-import 'package:mahmoud_portfolio/core/constants/app_strings.dart';
-import 'package:mahmoud_portfolio/core/di/injection_container.dart';
-import 'package:mahmoud_portfolio/core/responsive/breakpoints.dart';
-import 'package:mahmoud_portfolio/core/responsive/responsive_builder.dart';
-import 'package:mahmoud_portfolio/core/theme/app_colors.dart';
-import 'package:mahmoud_portfolio/core/theme/app_decorations.dart';
-import 'package:mahmoud_portfolio/core/theme/app_gradients.dart';
-import 'package:mahmoud_portfolio/core/theme/app_typography.dart';
-import 'package:mahmoud_portfolio/features/portfolio/domain/repositories/portfolio_repository.dart';
 
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
-
   @override
-  Widget build(BuildContext context) {
-    final aboutSkills = sl<PortfolioRepository>().getAboutSkills();
-
-    return ResponsiveBuilder(
-      builder: (context, screenType) {
-        final isDesktop = screenType.isDesktop;
-        final isMobile = screenType.isMobile;
-
-        return Center(
-          child: Container(
-            constraints: const BoxConstraints(
-              maxWidth: Breakpoints.maxContentWidth,
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: 24,
-              vertical: isDesktop ? 112 : (isMobile ? 48 : 80),
-            ),
-            child: isDesktop
-                ? Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 10,
-                        child: ScrollReveal(
-                          offsetX: -25,
-                          offsetY: 0,
-                          duration: const Duration(milliseconds: 500),
-                          child: _buildCodeMockupCard(),
-                        ),
-                      ),
-                      const SizedBox(width: 80),
-                      Expanded(
-                        flex: 12,
-                        child: ScrollReveal(
-                          offsetX: 25,
-                          offsetY: 0,
-                          duration: const Duration(milliseconds: 500),
-                          delay: const Duration(milliseconds: 100),
-                          child: _buildAboutTextContent(
-                            aboutSkills,
-                            isDesktop,
-                            isMobile,
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
-                : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ScrollReveal(
-                        child: _buildAboutTextContent(aboutSkills, isDesktop, isMobile),
-                      ),
-                      const SizedBox(height: 48),
-                      ScrollReveal(
-                        delay: const Duration(milliseconds: 100),
-                        child: Center(child: _buildCodeMockupCard()),
-                      ),
-                    ],
-                  ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildCodeMockupCard() {
-    return Container(
-      constraints: const BoxConstraints(maxWidth: 451),
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: AppColors.glassSurface,
-        borderRadius: const BorderRadius.all(Radius.circular(24)),
-        border: Border.all(color: AppColors.borderSubtle, width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.primary.withValues(alpha: 0.1),
-            blurRadius: 100,
-            offset: const Offset(0, 30),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: AppColors.background,
-              borderRadius: AppDecorations.radiusLg,
-              border: Border.all(color: AppColors.borderFaint),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _codeLine(
-                  "import 'package:flutter/material.dart';",
-                  AppColors.syntaxControl,
-                ),
-                _codeLine(
-                  "import 'package:flutter_bloc/flutter_bloc.dart';",
-                  AppColors.syntaxControl,
-                ),
-                const SizedBox(height: 12),
-                _codeLine(
-                  "class MyApp extends StatelessWidget {",
-                  AppColors.syntaxKeyword,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 14),
-                  child: _codeLine(
-                    "final String title = \"Flutter Dev\";",
-                    AppColors.syntaxVariable,
-                  ),
-                ),
-                const SizedBox(height: 12),
-                Padding(
-                  padding: const EdgeInsets.only(left: 14),
-                  child: _codeLine(
-                    "Widget build(BuildContext context) {",
-                    AppColors.syntaxFunction,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 28),
-                  child: _codeLine("return MaterialApp(", AppColors.syntaxType),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 28),
-                  child: _codeLine(
-                    "theme: AppTheme.dark,",
-                    AppColors.syntaxVariable,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 28),
-                  child: _codeLine(
-                    "home: HomeScreen(),",
-                    AppColors.syntaxString,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 28),
-                  child: _codeLine(");", AppColors.textPrimary),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 14),
-                  child: _codeLine("}", AppColors.textPrimary),
-                ),
-                _codeLine("}", AppColors.textPrimary),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-          Wrap(
-            spacing: 8,
-            runSpacing: 8,
-            children: const [
-              _AboutPill(label: "Clean Arch"),
-              _AboutPill(label: "MVVM"),
-              _AboutPill(label: "SOLID"),
-              _AboutPill(label: "Firebase"),
-              _AboutPill(label: "Bloc"),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _codeLine(String text, Color color) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 2),
-      child: Text(
-        text,
-        style: TextStyle(
-          fontFamily: AppTypography.fontMono,
-          fontSize: 12,
-          color: color,
-          height: 1.5,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAboutTextContent(
-    List<String> skills,
-    bool isDesktop,
-    bool isMobile,
-  ) {
-    final titleStyle = isDesktop ? AppTypography.h2 : AppTypography.h2Mobile;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          AppStrings.tagAbout,
-          style: AppTypography.sectionTag,
-        ),
-        const SizedBox(height: 16),
-        RichText(
-          text: TextSpan(
-            style: titleStyle,
+  Widget build(BuildContext c) => SectionFrame(
+    background: const Color(0xffebe9e2),
+    child: ScrollReveal(
+      child: LayoutBuilder(
+        builder: (c, b) {
+          final intro = Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TextSpan(text: "Crafting elegant code\n"),
-              WidgetSpan(
-                alignment: PlaceholderAlignment.baseline,
-                baseline: TextBaseline.alphabetic,
-                child: ShaderMask(
-                  shaderCallback: (bounds) =>
-                      AppGradients.sectionHighlight.createShader(bounds),
-                  child: Text(
-                    "one widget at a time.",
-                    style: titleStyle.copyWith(color: Colors.white),
-                  ),
-                ),
+              const Eyebrow('02 / The way I engineer'),
+              const SizedBox(height: 18),
+              const EditorialHeading('Ownership across\nthe mobile lifecycle.'),
+              const SizedBox(height: 28),
+              Text(
+                'I’m a Software Engineer specializing in Mobile Application Engineering. Across my projects, I’ve personally handled the vast majority of mobile development — architecture, implementation, integrations, debugging, and delivery.',
+                style: prose(size: 17, color: ink),
+              ),
+              const SizedBox(height: 18),
+              Text(
+                'I build applications from scratch and maintain published products. I can independently carry substantial mobile development while collaborating with designers, backend engineers, and other contributors.',
+                style: prose(size: 16),
               ),
             ],
-          ),
-        ),
-        const SizedBox(height: 24),
-        Text(
-          AppStrings.aboutParagraph1,
-          style: AppTypography.bodyMedium.copyWith(
-            height: 1.8,
-            color: const Color(0x8CE8EDF5),
-          ),
-        ),
-        const SizedBox(height: 20),
-        Text(
-          AppStrings.aboutParagraph2,
-          style: AppTypography.bodyMedium.copyWith(
-            height: 1.8,
-            color: const Color(0x73E8EDF5),
-          ),
-        ),
-        const SizedBox(height: 32),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: skills.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: isMobile ? 2 : 3,
-            crossAxisSpacing: 8,
-            mainAxisSpacing: 8,
-            childAspectRatio: isMobile ? 3.0 : 3.6,
-          ),
-          itemBuilder: (context, index) {
-            return ScrollReveal(
-              delay: staggerDelay(index, interval: const Duration(milliseconds: 40)),
-              offsetY: 14,
-              duration: const Duration(milliseconds: 300),
-              child: Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(
-                  color: AppColors.glassSurface,
-                  borderRadius: AppDecorations.radiusSm,
-                  border: Border.all(color: AppColors.borderSubtle),
+          );
+          final approach = Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final (n, title, text) in [
+                (
+                  '01',
+                  'Structure for change',
+                  'Design clear responsibilities for presentation, state, data, and integrations. Keep the codebase practical to maintain as the product grows.',
                 ),
-                child: Text(
-                  skills[index],
-                  style: const TextStyle(
-                    fontFamily: AppTypography.fontMono,
-                    fontSize: 12,
-                    color: Color(0x99E8EDF5),
+                (
+                  '02',
+                  'Connect the whole experience',
+                  'Resolve the behavior between features: sessions, unreliable connectivity, purchases, shared links, and navigation.',
+                ),
+                (
+                  '03',
+                  'Deliver, then keep improving',
+                  'Test critical behavior, investigate defects across the application, and maintain the product beyond its first delivery.',
+                ),
+              ])
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 28),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Eyebrow(n, color: accent),
+                      const SizedBox(height: 10),
+                      Text(title, style: display(24)),
+                      const SizedBox(height: 12),
+                      Text(text, style: prose(size: 15)),
+                    ],
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
                 ),
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class _AboutPill extends StatelessWidget {
-  final String label;
-
-  const _AboutPill({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
-      decoration: BoxDecoration(
-        color: AppColors.primary.withValues(alpha: 0.12),
-        borderRadius: AppDecorations.radiusPill,
-        border: Border.all(
-          color: AppColors.primary.withValues(alpha: 0.2),
-          width: 1,
-        ),
+            ],
+          );
+          return b.maxWidth > 850
+              ? Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(flex: 5, child: intro),
+                    const SizedBox(width: 100),
+                    Expanded(flex: 4, child: approach),
+                  ],
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [intro, const SizedBox(height: 44), approach],
+                );
+        },
       ),
-      child: Text(
-        label,
-        style: const TextStyle(
-          fontFamily: AppTypography.fontMono,
-          fontSize: 12,
-          color: AppColors.primary,
-        ),
-      ),
-    );
-  }
+    ),
+  );
 }

@@ -1,152 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mahmoud_portfolio/core/widgets/portfolio_ui.dart';
+import 'package:mahmoud_portfolio/core/di/injection_container.dart';
 import 'package:mahmoud_portfolio/core/constants/app_constants.dart';
-import 'package:mahmoud_portfolio/core/constants/app_strings.dart';
-import 'package:mahmoud_portfolio/core/theme/app_colors.dart';
-import 'package:mahmoud_portfolio/core/theme/app_decorations.dart';
-import 'package:mahmoud_portfolio/core/theme/app_gradients.dart';
-import 'package:mahmoud_portfolio/core/theme/app_typography.dart';
-import 'package:mahmoud_portfolio/core/utils/url_helper.dart';
-import 'package:mahmoud_portfolio/core/widgets/buttons/app_gradient_button.dart';
-import 'package:mahmoud_portfolio/core/widgets/buttons/app_outline_button.dart';
-import 'package:mahmoud_portfolio/features/portfolio/presentation/cubit/navigation_cubit.dart';
-import 'package:mahmoud_portfolio/features/portfolio/presentation/cubit/navigation_state.dart';
+import 'package:mahmoud_portfolio/features/portfolio/domain/repositories/portfolio_repository.dart';
+import '../../cubit/navigation_cubit.dart';
 
 class MobileDrawer extends StatelessWidget {
   const MobileDrawer({super.key});
-
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<NavigationCubit, NavigationState>(
-      builder: (context, state) {
-        final navItems = [
-          {'label': AppStrings.navHome, 'key': 'home', 'icon': Icons.home_rounded},
-          {'label': AppStrings.navAbout, 'key': 'about', 'icon': Icons.person_rounded},
-          {'label': AppStrings.navExperience, 'key': 'experience', 'icon': Icons.work_rounded},
-          {'label': AppStrings.navSkills, 'key': 'skills', 'icon': Icons.bolt_rounded},
-          {'label': AppStrings.navProjects, 'key': 'projects', 'icon': Icons.code_rounded},
-          {'label': AppStrings.navCertificates, 'key': 'certificates', 'icon': Icons.verified_rounded},
-          {'label': AppStrings.navContact, 'key': 'contact', 'icon': Icons.mail_rounded},
-        ];
-
-        return Drawer(
-          backgroundColor: AppColors.background,
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+  Widget build(BuildContext c) => Drawer(
+    backgroundColor: paper,
+    width: MediaQuery.sizeOf(c).width.clamp(280, 380) - 24,
+    child: SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(28),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 36,
-                            height: 36,
-                            decoration: BoxDecoration(
-                              gradient: AppGradients.primaryButton,
-                              borderRadius: AppDecorations.radiusSm,
-                            ),
-                            child: const Center(
-                              child: Text(
-                                AppConstants.developerInitials,
-                                style: TextStyle(
-                                  fontFamily: AppTypography.fontPrimary,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: AppColors.textPrimary,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            AppConstants.developerName,
-                            style: AppTypography.h4.copyWith(fontSize: 15),
-                          ),
-                        ],
-                      ),
-                      IconButton(
-                        tooltip: "Close menu",
-                        icon: const Icon(Icons.close_rounded, color: AppColors.textSecondary),
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
-                    ],
+                  const Eyebrow('Navigation'),
+                  const Spacer(),
+                  IconButton(
+                    tooltip: 'Close navigation',
+                    onPressed: () => Navigator.pop(c),
+                    icon: const Icon(Icons.close),
                   ),
-                  const SizedBox(height: 24),
-                  const Divider(color: AppColors.borderFaint),
-                  const SizedBox(height: 16),
-                  Expanded(
-                    child: ListView.separated(
-                      itemCount: navItems.length,
-                      separatorBuilder: (context, index) => const SizedBox(height: 6),
-                      itemBuilder: (context, index) {
-                        final item = navItems[index];
-                        final isActive = state.activeSection == item['key'];
-
-                        return Semantics(
-                          button: true,
-                          selected: isActive,
-                          label: "Navigate to ${item['label']}",
-                          child: ListTile(
-                            leading: Icon(
-                              item['icon'] as IconData,
-                              color: isActive ? AppColors.primary : AppColors.textSecondary,
-                              size: 20,
-                            ),
-                            title: Text(
-                              item['label'] as String,
-                              style: TextStyle(
-                                fontFamily: AppTypography.fontPrimary,
-                                fontSize: 15,
-                                fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
-                                color: isActive ? AppColors.primary : AppColors.textPrimary,
-                              ),
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: AppDecorations.radiusSm,
-                            ),
-                            tileColor: isActive
-                                ? AppColors.primary.withValues(alpha: 0.12)
-                                : Colors.transparent,
-                            onTap: () {
-                              Navigator.of(context).pop();
-                              context
-                                  .read<NavigationCubit>()
-                                  .scrollToSection(item['key'] as String);
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  AppOutlineButton(
-                    text: AppStrings.downloadCv,
-                    height: 44,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      UrlHelper.openUrl(AppConstants.cvDownloadUrl);
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  AppGradientButton(
-                    text: AppStrings.hireMe,
-                    height: 44,
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      context.read<NavigationCubit>().scrollToSection('contact');
-                    },
-                  ),
-                  const SizedBox(height: 12),
                 ],
               ),
-            ),
+              const SizedBox(height: 32),
+              for (final item in sl<PortfolioRepository>().getNavItems())
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 14),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(c);
+                      c.read<NavigationCubit>().scrollToSection(
+                        item.sectionKey,
+                        animated: PortfolioMotion.enabled(c),
+                        topInset: MediaQuery.textScalerOf(c).scale(17) > 27
+                            ? 108
+                            : 84,
+                      );
+                    },
+                    child: Text(item.label, style: display(30)),
+                  ),
+                ),
+              const SizedBox(height: 30),
+              const PortfolioButton(
+                'Download resume',
+                url: AppConstants.cvDownloadUrl,
+                primary: true,
+              ),
+              const SizedBox(height: 14),
+              const PortfolioButton('LinkedIn', url: AppConstants.linkedinUrl),
+            ],
           ),
-        );
-      },
-    );
-  }
+        ),
+      ),
+    ),
+  );
 }

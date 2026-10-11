@@ -11,11 +11,12 @@ class NavigationCubit extends Cubit<NavigationState> {
     'experience': GlobalKey(),
     'skills': GlobalKey(),
     'projects': GlobalKey(),
-    'certificates': GlobalKey(),
+    'education': GlobalKey(),
     'contact': GlobalKey(),
   };
 
   bool _isAutoScrolling = false;
+  int _scrollRevision = 0;
 
   NavigationCubit() : super(const NavigationState()) {
     scrollController.addListener(_onScroll);
@@ -64,11 +65,11 @@ class NavigationCubit extends Cubit<NavigationState> {
     // Check each section key position
     final orderedKeys = [
       'home',
+      'projects',
       'about',
       'experience',
       'skills',
-      'projects',
-      'certificates',
+      'education',
       'contact',
     ];
 
@@ -83,7 +84,8 @@ class NavigationCubit extends Cubit<NavigationState> {
           final sectionBottom = sectionTop + renderBox.size.height;
 
           // If the section spans across the viewport top reading line (navBarHeight + 60)
-          if (sectionTop <= (navBarHeight + 120) && sectionBottom > navBarHeight) {
+          if (sectionTop <= (navBarHeight + 120) &&
+              sectionBottom > navBarHeight) {
             detectedSection = keyName;
             break;
           }
@@ -109,29 +111,50 @@ class NavigationCubit extends Cubit<NavigationState> {
     }
   }
 
-  void scrollToSection(String sectionKey) {
+  void scrollToSection(
+    String sectionKey, {
+    bool animated = true,
+    double topInset = 84,
+  }) {
+    final revision = ++_scrollRevision;
     setActiveSection(sectionKey);
     final key = sectionKeys[sectionKey];
 
     if (key?.currentContext != null && scrollController.hasClients) {
       final renderBox = key!.currentContext!.findRenderObject() as RenderBox?;
       if (renderBox != null && renderBox.hasSize) {
+        if (!animated) {
+          _isAutoScrolling = false;
+          final position = renderBox.localToGlobal(Offset.zero);
+          scrollController.jumpTo(
+            (scrollController.offset + position.dy - topInset).clamp(
+              0.0,
+              scrollController.position.maxScrollExtent,
+            ),
+          );
+          setActiveSection(sectionKey);
+          return;
+        }
         _isAutoScrolling = true;
         final position = renderBox.localToGlobal(Offset.zero);
-        const double navBarOffset = 70.0;
-        final targetOffset = (scrollController.offset + position.dy - navBarOffset)
-            .clamp(0.0, scrollController.position.maxScrollExtent);
+        final double navBarOffset = topInset;
+        final targetOffset =
+            (scrollController.offset + position.dy - navBarOffset).clamp(
+              0.0,
+              scrollController.position.maxScrollExtent,
+            );
 
         scrollController
             .animateTo(
-          targetOffset,
-          duration: const Duration(milliseconds: 600),
-          curve: Curves.easeInOutCubic,
-        )
+              targetOffset,
+              duration: const Duration(milliseconds: 600),
+              curve: Curves.easeInOutCubic,
+            )
             .then((_) {
-          _isAutoScrolling = false;
-          setActiveSection(sectionKey);
-        });
+              if (isClosed || revision != _scrollRevision) return;
+              _isAutoScrolling = false;
+              setActiveSection(sectionKey);
+            });
       }
     }
   }

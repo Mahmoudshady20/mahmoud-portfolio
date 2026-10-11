@@ -2,34 +2,34 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   // Backgrounds
-  static const Color background = Color(0xFF0D1117);
-  static const Color surface = Color(0xFF161B22);
-  static const Color surfaceLight = Color(0xFF1C2030);
+  static const Color background = Color(0xFFF6F4EF);
+  static const Color surface = Color(0xFFFFFFFF);
+  static const Color surfaceLight = Color(0xFFEDEAE3);
 
   // Glassmorphism surfaces
-  static const Color glassSurface = Color(0x0AFFFFFF); // rgba(255, 255, 255, 0.04)
-  static const Color glassSurfaceHover = Color(0x14FFFFFF); // rgba(255, 255, 255, 0.08)
+  static const Color glassSurface = Color(0x0AFFFFFF);
+  static const Color glassSurfaceHover = Color(0xFFDDDCD5);
 
   // Primary Brand Colors
-  static const Color primary = Color(0xFF4F8CFF); // rgb(79, 140, 255)
-  static const Color primaryLight = Color(0xFF7B6EF6); // rgb(123, 110, 246)
-  static const Color purple = Color(0xFF8B5CF6); // rgb(139, 92, 246)
-  static const Color cyan = Color(0xFF22D3EE); // rgb(34, 211, 238)
-  static const Color green = Color(0xFF10B981); // rgb(16, 185, 129)
-  static const Color orange = Color(0xFFFFA000); // rgb(255, 160, 0)
+  static const Color primary = Color(0xFF694D91);
+  static const Color primaryLight = Color(0xFF7B6EF6);
+  static const Color purple = Color(0xFF8B5CF6);
+  static const Color cyan = Color(0xFF22D3EE);
+  static const Color green = Color(0xFF10B981);
+  static const Color orange = Color(0xFFFFA000);
 
   // Text Colors
-  static const Color textWhite = Color(0xFFFFFFFF);
-  static const Color textPrimary = Color(0xFFE8EDF5);
-  static const Color textSecondary = Color(0x99E8EDF5); // rgba(232, 237, 245, 0.6)
-  static const Color textMuted = Color(0x80E8EDF5); // rgba(232, 237, 245, 0.5)
-  static const Color textSubtle = Color(0x73E8EDF5); // rgba(232, 237, 245, 0.45)
-  static const Color textFaint = Color(0x59E8EDF5); // rgba(232, 237, 245, 0.35)
+  static const Color textWhite = Color(0xFF222322);
+  static const Color textPrimary = Color(0xFF222322);
+  static const Color textSecondary = Color(0xFF62645F);
+  static const Color textMuted = Color(0xFF62645F);
+  static const Color textSubtle = Color(0xFF62645F);
+  static const Color textFaint = Color(0xFF62645F);
 
   // Borders
-  static const Color borderSubtle = Color(0x14FFFFFF); // rgba(255, 255, 255, 0.08)
-  static const Color borderFaint = Color(0x0DFFFFFF); // rgba(255, 255, 255, 0.05)
-  static const Color borderPrimary = Color(0x4D4F8CFF); // rgba(79, 140, 255, 0.3)
+  static const Color borderSubtle = Color(0xFFDDDCD5);
+  static const Color borderFaint = Color(0xFFE2E1DA);
+  static const Color borderPrimary = Color(0x4D4F8CFF);
 
   // Traffic Lights
   static const Color dotRed = Color(0xFFFF5F56);

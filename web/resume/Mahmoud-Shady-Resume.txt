@@ -1,0 +1,101 @@
+Mahmoud Shady
+
+Software Engineer | Mobile Application Engineering | Flutter & Dart
+
+Cairo, Egypt | mahmoud4ady@gmail.com
+
+https://www.linkedin.com/in/mahmoud-shady-9b8ab0229/
+
+https://github.com/Mahmoudshady20
+
+PROFESSIONAL SUMMARY
+
+Software Engineer specializing in complete mobile applications for iOS and Android. Substantial ownership across architecture, implementation, API and platform integration, testing, debugging, delivery, and maintenance. Flutter and Dart are my primary technologies. Personally handled the vast majority of mobile development across my projects.
+
+TECHNICAL SKILLS
+
+Flutter, Dart, BLoC/Cubit, Provider; Clean Architecture, SOLID, modular architecture, dependency injection; REST APIs, Dio/Retrofit, Firebase Authentication, Cloud Messaging, RevenueCat; Hive, secure storage, local caching; deep links, push/local notifications, responsive UI, Arabic/RTL, animations; unit/widget testing, Git/GitHub, Android/iOS release preparation.
+
+PROFESSIONAL EXPERIENCE
+
+Software Engineer | Mobile Developer | Tara Digital | Full Stack Digital Solutions
+
+July 2025-present
+
+- Take substantial responsibility for building and maintaining complete Flutter mobile applications across education, nutrition, and women's health products, from requirements and architecture through implementation, integration, testing, and delivery.
+
+- Make mobile engineering decisions about application structure, state management, data flow, navigation, and reusable UI to keep growing codebases maintainable.
+
+Flutter Developer | Upwork
+
+September 2021-October 2025
+
+- Built Flutter mobile applications through project-based engagements, taking substantial responsibility for translating requirements into working application functionality and delivery.
+
+- Designed and implemented application structure, state management, API-connected workflows, and persistent local data, alongside the user interface.
+
+Software Engineer| Mobile Developer | Phlera Ltd.
+
+December 2024-July 2025
+
+- Engineered Flutter mobile applications for e-commerce and business use cases, taking substantial responsibility for application implementation and integration with backend services.
+
+- Translated business requirements into complete mobile workflows, connecting account behavior, product discovery, shopping interactions, and application data.
+
+Flutter Developer | Shbbak Solution Group
+
+October 2023-October 2024
+
+- Developed Flutter application functionality in a professional training environment, implementing Dart logic, API-connected behavior, and user-facing workflows.
+
+- Took responsibility for assigned mobile development tasks from understanding requirements through implementation, debugging, and review.
+
+Mahmoud Shady | Selected engineering work
+
+SELECTED PROJECTS
+
+Hayah | Community & content discovery
+
+In development
+
+A substantial application connecting content discovery, community interactions, and account-based experiences. Mobile architecture and development foundations; further features and production validation are in progress.
+
+Designed modular architecture and authentication foundations; engineered feed/search behavior, responsive Arabic/RTL UI, and focused tests. Under active development; not released.
+
+Rejeemat | Nutrition & meal planning
+
+Delivered | maintained
+
+Recipes, meal planning, account experiences, and daily reminders in one connected mobile product. Initial application completed approximately three months after development began. I personally handled the vast majority of mobile development.
+
+Engineered account, recipe, sharing/deep-link, and persisted reminder workflows. Mobile responsibility excludes backend authorship.
+
+Rosy Calc | Women's health & wellness
+
+Published application
+
+A published women's health application bringing together cycle tracking, health content, and community experiences. Substantial mobile development and ongoing production maintenance, alongside other contributors.
+
+Technologies: Flutter, Dart, Firebase, REST APIs, Local caching, Notifications
+
+Qudratuh | Education & exam preparation
+
+Published application
+
+An aptitude-exam preparation application for Saudi students combining practice, assessments, review, progress, and subscription access. Personally handled the vast majority of mobile development across architecture, implementation, integrations, debugging, and delivery.
+
+Technologies: Flutter, Dart, Clean Architecture, BLoC / Cubit, RevenueCat, Responsive UI
+
+ADDITIONAL MOBILE APPLICATIONS
+
+HUB Spare Parts: marketplace shopping, orders, and refund workflows using Flutter, Provider, and REST APIs. Doa2k: medication records and timezone-aware reminders using Flutter, Provider, Hive, and local notifications.
+
+EDUCATION
+
+Minufiya University | Bachelor's degree | Computer Science
+
+September 2019 - September 2023
+
+Information Technology Institute (ITI) | Android Development training
+
+February - March 2022

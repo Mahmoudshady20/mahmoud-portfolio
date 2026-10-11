@@ -5,6 +5,26 @@ abstract class AppTypography {
   static const String fontPrimary = 'SpaceGrotesk';
   static const String fontMono = 'JetBrainsMono';
 
+  static TextStyle editorialDisplay(
+    double size, {
+    Color color = AppColors.textPrimary,
+  }) => TextStyle(
+    fontFamily: fontPrimary,
+    fontSize: size,
+    fontWeight: FontWeight.w600,
+    height: 1.09,
+    letterSpacing: -1.8,
+    color: color,
+  );
+
+  static TextStyle body(double size, {Color color = AppColors.textSecondary}) =>
+      TextStyle(
+        fontFamily: fontPrimary,
+        fontSize: size,
+        height: 1.65,
+        color: color,
+      );
+
   static const TextStyle heroDisplay = TextStyle(
     fontFamily: fontPrimary,
     fontSize: 72,

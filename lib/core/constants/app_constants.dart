@@ -1,13 +1,14 @@
 abstract class AppConstants {
-  static const String developerName = "Mahmoud Shady";
-  static const String developerInitials = "MS";
-  static const String developerRole = "Flutter Developer";
-  static const String location = "Cairo, Egypt";
-  static const String email = "mahmoud4ady@gmail.com";
-  static const String githubUrl = "https://github.com/Mahmoudshady20";
-  static const String linkedinUrl =
-      "https://www.linkedin.com/in/mahmoud-shady-9b8ab0229/";
-  static const String cvDownloadUrl =
-      "https://drive.google.com/drive/folders/1kCCcYavwQZkejKQ3YG1rsT5ItVQ3aed0";
-  static const String copyrightText = "© 2025 · Built with Flutter ❤";
+  static const developerName = 'Mahmoud Shady';
+  static const developerInitials = 'MS';
+  static const developerRole = 'Software Engineer';
+  static const location = 'Cairo, Egypt';
+  static const email = 'mahmoud4ady@gmail.com';
+  static const githubUrl = 'https://github.com/Mahmoudshady20';
+  static const linkedinUrl =
+      'https://www.linkedin.com/in/mahmoud-shady-9b8ab0229/';
+  static const cvDownloadUrl = 'resume/Mahmoud-Shady-Resume.pdf';
+  static const canonicalUrl =
+      'https://mahmoudshady20.github.io/mahmoud-portfolio/';
+  static String get copyrightText => '© ${DateTime.now().year} Mahmoud Shady';
 }

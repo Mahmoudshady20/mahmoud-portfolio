@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mahmoud_portfolio/app/app.dart';
 import 'package:mahmoud_portfolio/core/di/injection_container.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  VisibilityDetectorController.instance.updateInterval = Duration.zero;
   setUpAll(() async {
     await initDependencies();
   });

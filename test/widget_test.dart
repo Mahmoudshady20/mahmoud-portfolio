@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mahmoud_portfolio/app/app.dart';
 import 'package:mahmoud_portfolio/core/di/injection_container.dart';
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
+  VisibilityDetectorController.instance.updateInterval = Duration.zero;
   testWidgets('Portfolio app smoke test', (WidgetTester tester) async {
     tester.view.physicalSize = const Size(1280, 900);
     tester.view.devicePixelRatio = 1.0;

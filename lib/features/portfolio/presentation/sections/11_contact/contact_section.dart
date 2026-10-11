@@ -1,211 +1,86 @@
 import 'package:flutter/material.dart';
-import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
-import 'package:mahmoud_portfolio/core/animations/stagger_animation.dart';
+import 'package:flutter/services.dart';
+import 'package:mahmoud_portfolio/core/widgets/portfolio_ui.dart';
 import 'package:mahmoud_portfolio/core/constants/app_constants.dart';
-import 'package:mahmoud_portfolio/core/constants/app_strings.dart';
-import 'package:mahmoud_portfolio/core/responsive/breakpoints.dart';
-import 'package:mahmoud_portfolio/core/responsive/responsive_builder.dart';
-import 'package:mahmoud_portfolio/core/theme/app_colors.dart';
-import 'package:mahmoud_portfolio/core/theme/app_decorations.dart';
-import 'package:mahmoud_portfolio/core/theme/app_typography.dart';
-import 'package:mahmoud_portfolio/core/utils/url_helper.dart';
-import 'package:mahmoud_portfolio/core/widgets/buttons/app_gradient_button.dart';
-import 'package:mahmoud_portfolio/core/widgets/buttons/app_outline_button.dart';
-import 'package:mahmoud_portfolio/core/widgets/cards/glass_card.dart';
-import 'package:mahmoud_portfolio/core/widgets/section_header.dart';
+import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
 
 class ContactSection extends StatelessWidget {
   const ContactSection({super.key});
-
   @override
-  Widget build(BuildContext context) {
-    return ResponsiveBuilder(
-      builder: (context, screenType) {
-        final isMobile = screenType.isMobile;
-
-        return Center(
-          child: Container(
-            constraints: const BoxConstraints(
-              maxWidth: Breakpoints.maxContentWidth,
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: 24,
-              vertical: isMobile ? 48 : 112,
-            ),
-            child: Column(
-              children: [
-                const SectionHeader(
-                  tag: AppStrings.tagContact,
-                  titlePrefix: AppStrings.contactTitlePrefix,
-                  titleHighlight: AppStrings.contactTitleHighlight,
-                  subtitle: AppStrings.contactSubtitle,
-                  isCentered: true,
-                ),
-                const SizedBox(height: 56),
-
-                // Contact Cards with stagger
-                ScrollReveal(
-                  delay: const Duration(milliseconds: 100),
-                  child: Wrap(
-                    spacing: 16,
-                    runSpacing: 16,
-                    alignment: WrapAlignment.center,
-                    children: [
-                      _buildContactCard(
-                        icon: Icons.email_rounded,
-                        title: "Email",
-                        value: AppConstants.email,
-                        isMobile: isMobile,
-                        onTap: () => UrlHelper.sendEmail(AppConstants.email),
-                        delay: 0,
-                      ),
-                      _buildContactCard(
-                        icon: Icons.code_rounded,
-                        title: "GitHub",
-                        value: "github.com/mahmoudshady20",
-                        isMobile: isMobile,
-                        onTap: () => UrlHelper.openUrl(AppConstants.githubUrl),
-                        delay: 1,
-                      ),
-                      _buildContactCard(
-                        icon: Icons.work_rounded,
-                        title: "LinkedIn",
-                        value: "linkedin.com/in/mahmoudshady",
-                        isMobile: isMobile,
-                        onTap: () => UrlHelper.openUrl(AppConstants.linkedinUrl),
-                        delay: 2,
-                      ),
-                      _buildContactCard(
-                        icon: Icons.location_on_rounded,
-                        title: "Location",
-                        value: AppConstants.location,
-                        isMobile: isMobile,
-                        onTap: null,
-                        delay: 3,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 48),
-
-                // Direct Action Buttons
-                ScrollReveal(
-                  delay: const Duration(milliseconds: 300),
-                  child: Wrap(
-                    spacing: 16,
-                    runSpacing: 12,
-                    alignment: WrapAlignment.center,
-                    children: [
-                      AppGradientButton(
-                        text: "Send Message / Email",
-                        icon: const Icon(
-                          Icons.send_rounded,
-                          size: 16,
-                          color: Colors.white,
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 14,
-                        ),
-                        onPressed: () => UrlHelper.sendEmail(
-                          AppConstants.email,
-                          subject: "Flutter Project Inquiry",
-                        ),
-                      ),
-                      AppOutlineButton(
-                        text: "Download Resume",
-                        icon: const Icon(
-                          Icons.download_rounded,
-                          size: 16,
-                          color: AppColors.primary,
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 14,
-                        ),
-                        onPressed: () =>
-                            UrlHelper.openUrl(AppConstants.cvDownloadUrl),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+  Widget build(BuildContext c) => SectionFrame(
+    background: ink,
+    child: ScrollReveal(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Eyebrow('06 / Start a conversation', color: Color(0xffc7b3e2)),
+          const SizedBox(height: 24),
+          const EditorialHeading(
+            'Good products start\nwith a conversation.',
+            color: paper,
+          ),
+          const SizedBox(height: 28),
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 660),
+            child: Text(
+              'Discuss a Software Engineer, Mobile Engineer, or Flutter Engineer opportunity — or a mobile application that needs thoughtful architecture and substantial technical ownership.',
+              style: prose(size: 18, color: const Color(0xffc4c7be)),
             ),
           ),
-        );
-      },
-    );
-  }
-
-  Widget _buildContactCard({
-    required IconData icon,
-    required String title,
-    required String value,
-    required bool isMobile,
-    required int delay,
-    VoidCallback? onTap,
-  }) {
-    return ScrollReveal(
-      delay: staggerDelay(delay, interval: const Duration(milliseconds: 60)),
-      offsetY: 14,
-      duration: const Duration(milliseconds: 350),
-      child: GlassCard(
-        padding: EdgeInsets.symmetric(
-          horizontal: isMobile ? 16 : 20,
-          vertical: 16,
-        ),
-        borderRadius: AppDecorations.radiusXl,
-        onTap: onTap,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: isMobile ? 280 : 320),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+          const SizedBox(height: 36),
+          Wrap(
+            spacing: 14,
+            runSpacing: 14,
             children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: AppColors.primary.withValues(alpha: 0.1),
-                  borderRadius: AppDecorations.radiusSm,
-                  border: Border.all(
-                    color: AppColors.primary.withValues(alpha: 0.2),
-                  ),
-                ),
-                child: Icon(icon, color: AppColors.primary, size: 20),
+              const PortfolioButton(
+                'Email Mahmoud',
+                url: 'mailto:mahmoud4ady@gmail.com',
+                primary: true,
+                inverse: true,
+                icon: Icons.mail_outline_rounded,
               ),
-              const SizedBox(width: 14),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontFamily: AppTypography.fontMono,
-                        fontSize: 12,
-                        color: const Color(0x73E8EDF5),
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      value,
-                      style: TextStyle(
-                        fontFamily: AppTypography.fontPrimary,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textWhite,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
+              const PortfolioButton(
+                'Connect on LinkedIn',
+                url: AppConstants.linkedinUrl,
+                inverse: true,
+              ),
+              const PortfolioButton(
+                'Download resume',
+                url: AppConstants.cvDownloadUrl,
+                inverse: true,
               ),
             ],
           ),
-        ),
+          const SizedBox(height: 36),
+          Wrap(
+            spacing: 16,
+            runSpacing: 12,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: [
+              SelectableText(
+                AppConstants.email,
+                style: prose(size: 16, color: paper),
+              ),
+              IconButton(
+                tooltip: 'Copy email address',
+                color: paper,
+                onPressed: () async {
+                  await Clipboard.setData(
+                    const ClipboardData(text: AppConstants.email),
+                  );
+                  if (c.mounted) {
+                    ScaffoldMessenger.of(c).showSnackBar(
+                      const SnackBar(content: Text('Email address copied.')),
+                    );
+                  }
+                },
+                icon: const Icon(Icons.copy_rounded, size: 18),
+              ),
+              const Eyebrow('Cairo, Egypt', color: Color(0xffc4c7be)),
+            ],
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
 }

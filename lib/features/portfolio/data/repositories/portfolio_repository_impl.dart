@@ -4,6 +4,7 @@ import '../../domain/entities/experience_entity.dart';
 import '../../domain/entities/skill_entity.dart';
 import '../../domain/entities/project_entity.dart';
 import '../../domain/entities/certificate_entity.dart';
+import '../../domain/entities/education_entity.dart';
 import '../../domain/repositories/portfolio_repository.dart';
 import '../datasources/portfolio_local_data_source.dart';
 
@@ -25,13 +26,17 @@ class PortfolioRepositoryImpl implements PortfolioRepository {
   List<ExperienceEntity> getExperiences() => localDataSource.getExperiences();
 
   @override
+  List<EducationEntity> getEducation() => localDataSource.getEducation();
+
+  @override
   List<SkillEntity> getSkills() => localDataSource.getSkills();
 
   @override
   List<ProjectEntity> getProjects() => localDataSource.getProjects();
 
   @override
-  List<CertificateEntity> getCertificates() => localDataSource.getCertificates();
+  List<CertificateEntity> getCertificates() =>
+      localDataSource.getCertificates();
 
   @override
   List<String> getAboutSkills() => localDataSource.getAboutSkills();

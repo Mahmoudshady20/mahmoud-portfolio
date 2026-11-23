@@ -6,7 +6,7 @@ class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
   @override
   Widget build(BuildContext c) => SectionFrame(
-    background: const Color(0xffebe9e2),
+    background: const Color(0xffe7eee7),
     child: ScrollReveal(
       child: LayoutBuilder(
         builder: (c, b) {

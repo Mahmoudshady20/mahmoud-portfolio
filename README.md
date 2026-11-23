@@ -40,9 +40,9 @@ The generator requires Arial on macOS or DejaVu Sans on Linux and embeds the doc
 
 ## Design and accessibility
 
-Warm ivory, ink typography, restrained violet accents, original project artwork, and contrasting contact content form the visual system. Typography extends the existing `AppTypography` system. Navigation, buttons, case studies, and diagrams expose semantics. External links use the existing URL launcher, which supplies `noopener,noreferrer` on web.
+A deep forest-green hero, lime highlights, pale neutral surfaces, rounded project cards, and an original mobile engineering concept illustration form the visual system. The illustration is decorative, not a screenshot of a released product. Typography extends the existing `AppTypography` system. Navigation, buttons, case studies, and diagrams expose semantics. External links use the existing URL launcher, which supplies `noopener,noreferrer` on web.
 
-Shared motion uses finite opacity/transform reveals, staggered cards, hover movement, section scrolling, and page transitions. Flutter Web maps browser `prefers-reduced-motion` to accessibility features; custom animations and animated section scrolling are disabled accordingly. The HTML fallback also respects reduced motion.
+Shared motion uses finite opacity/transform reveals, an entrance rotation and translation for the hero illustration, staggered cards, hover movement, section scrolling, and page transitions. Flutter Web maps browser `prefers-reduced-motion` to accessibility features; custom animations and animated section scrolling are disabled accordingly. The HTML fallback also respects reduced motion.
 
 The HTML entry contains useful semantic content until Flutter's first frame. Static case studies remain readable without JavaScript. Titles, descriptions, canonical URLs, Person structured data, Open Graph images, manifest, favicon, sitemap, and robots configuration are included.
 
@@ -50,6 +50,6 @@ The HTML entry contains useful semantic content until Flutter's first frame. Sta
 
 Verified existing hosting: **https://mahmoudshady20.github.io/mahmoud-portfolio/**.
 
-The GitHub Pages workflow pins the validated Flutter SDK and runs analysis, tests, build, and release validation. A push to `main` or workflow dispatch publishes the site. **Do not push to `main` or dispatch deployment until the owner approves publishing.** No hosting-provider change is required.
+The GitHub Pages workflow pins the validated Flutter SDK and runs analysis, tests, build, and release validation. A push to `main` or workflow dispatch publishes the site. Publishing changes to `main` triggers the existing deployment workflow. No hosting-provider change is required.
 
 After approved deployment, verify the live page, case studies, resume, sharing image, and product destinations. Only then synchronize the verified URL to LinkedIn Contact Info and Featured with owner approval. LinkedIn settings, personal screening answers, and authentication data are not stored in this public repository.

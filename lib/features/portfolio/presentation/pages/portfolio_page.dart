@@ -12,6 +12,7 @@ import '../sections/07_projects/projects_section.dart';
 import '../sections/10_education/education_section.dart';
 import '../sections/11_contact/contact_section.dart';
 import '../sections/12_footer/footer_section.dart';
+import '../widgets/career_chat.dart';
 
 class PortfolioPage extends StatefulWidget {
   const PortfolioPage({super.key});
@@ -90,6 +91,13 @@ class _PortfolioPageState extends State<PortfolioPage> {
                 },
               ),
             ),
+          ),
+          // The career assistant floats above the content; its panel builds
+          // only while open, so scrolling pays nothing for it.
+          const Positioned(
+            right: 16,
+            bottom: 16,
+            child: SafeArea(child: CareerChat()),
           ),
         ],
       ),

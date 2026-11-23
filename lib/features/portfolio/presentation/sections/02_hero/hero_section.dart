@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+import 'package:visibility_detector/visibility_detector.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -112,7 +113,7 @@ class HeroSection extends StatelessWidget {
           final visual = ScrollReveal(
             delay: const Duration(milliseconds: 180),
             child: MediaQuery.withNoTextScaling(
-              child: const _EngineeringComposition(),
+              child: const HeroAmbient(child: _EngineeringComposition()),
             ),
           );
           return Column(
@@ -405,4 +406,80 @@ class _CircuitPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}
+
+/// One bounded repaint island, paused offscreen and when motion is disabled.
+class HeroAmbient extends StatefulWidget {
+  final Widget child;
+  const HeroAmbient({super.key, required this.child});
+  @override
+  State<HeroAmbient> createState() => _HeroAmbientState();
+}
+
+class _HeroAmbientState extends State<HeroAmbient>
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+  late final AnimationController controller = AnimationController(
+    vsync: this,
+    duration: const Duration(seconds: 7),
+  );
+  final visibilityKey = UniqueKey();
+  bool visible = true;
+  bool foreground = true;
+  bool disposed = false;
+  void syncMotion() {
+    if (disposed || !mounted) return;
+    if (visible && foreground && PortfolioMotion.enabled(context)) {
+      if (!controller.isAnimating) controller.repeat(reverse: true);
+    } else {
+      controller.stop();
+      if (!PortfolioMotion.enabled(context)) controller.value = 0;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    syncMotion();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    foreground = state == AppLifecycleState.resumed;
+    syncMotion();
+  }
+
+  @override
+  Widget build(BuildContext context) => VisibilityDetector(
+    key: visibilityKey,
+    onVisibilityChanged: (info) {
+      visible = info.visibleFraction > .02;
+      syncMotion();
+    },
+    child: RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: controller,
+        child: RepaintBoundary(child: widget.child),
+        builder: (context, child) {
+          final t = Curves.easeInOutSine.transform(controller.value);
+          return Transform.translate(
+            offset: Offset(0, -7 * t),
+            child: Transform.rotate(angle: .008 * t, child: child),
+          );
+        },
+      ),
+    ),
+  );
+  @override
+  void dispose() {
+    disposed = true;
+    WidgetsBinding.instance.removeObserver(this);
+    controller.dispose();
+    super.dispose();
+  }
 }

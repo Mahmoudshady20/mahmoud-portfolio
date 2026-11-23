@@ -74,6 +74,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   final controller = nav.scrollController;
                   final progress =
                       controller.hasClients &&
+                          controller.position.hasContentDimensions &&
                           controller.position.maxScrollExtent > 0
                       ? (controller.offset /
                                 controller.position.maxScrollExtent)

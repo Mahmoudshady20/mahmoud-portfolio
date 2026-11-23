@@ -244,3 +244,39 @@ class StatusLabel extends StatelessWidget {
     ],
   );
 }
+
+/// Rows share their tallest child's height without clipping enlarged text.
+class EqualHeightGrid extends StatelessWidget {
+  final List<Widget> children;
+  final int columns;
+  final double gap;
+  const EqualHeightGrid({
+    super.key,
+    required this.children,
+    required this.columns,
+    this.gap = 24,
+  });
+  @override
+  Widget build(BuildContext c) => Column(
+    children: [
+      for (int start = 0; start < children.length; start += columns) ...[
+        if (start > 0) SizedBox(height: gap),
+        IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              for (int col = 0; col < columns; col++) ...[
+                if (col > 0) SizedBox(width: gap),
+                Expanded(
+                  child: start + col < children.length
+                      ? children[start + col]
+                      : const SizedBox.shrink(),
+                ),
+              ],
+            ],
+          ),
+        ),
+      ],
+    ],
+  );
+}

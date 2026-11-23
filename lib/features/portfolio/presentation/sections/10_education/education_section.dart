@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
 import 'package:mahmoud_portfolio/core/widgets/portfolio_ui.dart';
 import 'package:mahmoud_portfolio/core/di/injection_container.dart';
 import 'package:mahmoud_portfolio/features/portfolio/domain/repositories/portfolio_repository.dart';
@@ -15,20 +16,26 @@ class EducationSection extends StatelessWidget {
         const EditorialHeading('A foundation\nin computer science.'),
         const SizedBox(height: 36),
         for (final education in sl<PortfolioRepository>().getEducation())
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 24),
-            decoration: const BoxDecoration(
-              border: Border(top: BorderSide(color: line)),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(education.school, style: display(23)),
-                const SizedBox(height: 8),
-                Text(education.degree, style: prose(size: 16, color: ink)),
-                const SizedBox(height: 8),
-                Eyebrow(education.period),
-              ],
+          ScrollReveal(
+            child: Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(bottom: 24),
+              padding: const EdgeInsets.all(28),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: line),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(education.school, style: display(23)),
+                  const SizedBox(height: 8),
+                  Text(education.degree, style: prose(size: 16, color: ink)),
+                  const SizedBox(height: 8),
+                  Eyebrow(education.period),
+                ],
+              ),
             ),
           ),
       ],

@@ -13,7 +13,7 @@ class ContactSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Eyebrow('06 / Start a conversation', color: Color(0xffc7b3e2)),
+          const Eyebrow('06 / Start a conversation', color: Color(0xffd5f78b)),
           const SizedBox(height: 24),
           const EditorialHeading(
             'Good products start\nwith a conversation.',

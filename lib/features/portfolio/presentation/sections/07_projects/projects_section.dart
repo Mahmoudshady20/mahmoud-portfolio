@@ -69,16 +69,16 @@ class ProjectsSection extends StatelessWidget {
                           Navigator.pushNamed(c, '/projects/${p.slug}'),
                       semanticLabel: 'Open ${p.title} case study',
                       child: Padding(
-                        padding: const EdgeInsets.all(28),
+                        padding: const EdgeInsets.fromLTRB(30, 28, 30, 26),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Eyebrow(p.category),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 20),
                             Text(p.title, style: display(25)),
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 18),
                             Text(p.description, style: prose(size: 14)),
-                            const SizedBox(height: 24),
+                            const SizedBox(height: 28),
                             const Spacer(),
                             const Text(
                               'Explore case study ↗',
@@ -144,7 +144,7 @@ class _ProjectCardState extends State<_ProjectCard> {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(28),
+              padding: const EdgeInsets.fromLTRB(30, 30, 30, 30),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -153,11 +153,11 @@ class _ProjectCardState extends State<_ProjectCard> {
                     runSpacing: 8,
                     children: [Eyebrow(p.category), StatusLabel(p.status)],
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   Text(p.heading, style: display(28)),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 18),
                   Text(p.description, style: prose(size: 15)),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   Container(
                     padding: const EdgeInsets.only(left: 16),
                     decoration: const BoxDecoration(
@@ -165,16 +165,16 @@ class _ProjectCardState extends State<_ProjectCard> {
                     ),
                     child: Text(p.outcome, style: prose(size: 14, color: ink)),
                   ),
-                  const SizedBox(height: 22),
+                  const SizedBox(height: 26),
                   ProjectWalkthrough(
                     slug: p.slug,
                     challenge: p.challenge,
                     outcome: p.outcome,
                   ),
-                  const SizedBox(height: 26),
+                  const SizedBox(height: 30),
                   TechnologyLine(p.techStack.take(4).toList()),
                   const Spacer(),
-                  const SizedBox(height: 26),
+                  const SizedBox(height: 30),
                   Row(
                     children: [
                       const Expanded(

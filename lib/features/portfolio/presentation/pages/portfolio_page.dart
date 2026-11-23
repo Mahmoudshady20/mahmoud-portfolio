@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mahmoud_portfolio/core/widgets/portfolio_ui.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubit/navigation_cubit.dart';
 import '../sections/01_header/mobile_drawer.dart';
@@ -61,6 +62,33 @@ class _PortfolioPageState extends State<PortfolioPage> {
             left: 0,
             right: 0,
             child: CustomNavigationBar(scaffoldKey: scaffoldKey),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            top: MediaQuery.textScalerOf(c).scale(17) > 27 ? 106 : 82,
+            child: IgnorePointer(
+              child: AnimatedBuilder(
+                animation: nav.scrollController,
+                builder: (c, _) {
+                  final controller = nav.scrollController;
+                  final progress =
+                      controller.hasClients &&
+                          controller.position.maxScrollExtent > 0
+                      ? (controller.offset /
+                                controller.position.maxScrollExtent)
+                            .clamp(0.0, 1.0)
+                      : 0.0;
+                  return LinearProgressIndicator(
+                    value: progress,
+                    minHeight: 2,
+                    backgroundColor: Colors.transparent,
+                    color: accent,
+                    semanticsLabel: 'Page reading progress',
+                  );
+                },
+              ),
+            ),
           ),
         ],
       ),

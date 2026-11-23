@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 abstract class AppColors {
   // Backgrounds
-  static const Color background = Color(0xFFF6F4EF);
+  static const Color background = Color(0xFFF5F7F4);
   static const Color surface = Color(0xFFFFFFFF);
-  static const Color surfaceLight = Color(0xFFEDEAE3);
+  static const Color surfaceLight = Color(0xFFE8EEE8);
 
   // Glassmorphism surfaces
   static const Color glassSurface = Color(0x0AFFFFFF);
-  static const Color glassSurfaceHover = Color(0xFFDDDCD5);
+  static const Color glassSurfaceHover = Color(0xFFD8E0D8);
 
   // Primary Brand Colors
-  static const Color primary = Color(0xFF694D91);
+  static const Color primary = Color(0xFF24644F);
   static const Color primaryLight = Color(0xFF7B6EF6);
   static const Color purple = Color(0xFF8B5CF6);
   static const Color cyan = Color(0xFF22D3EE);
@@ -21,14 +21,14 @@ abstract class AppColors {
   // Text Colors
   static const Color textWhite = Color(0xFF222322);
   static const Color textPrimary = Color(0xFF222322);
-  static const Color textSecondary = Color(0xFF62645F);
-  static const Color textMuted = Color(0xFF62645F);
-  static const Color textSubtle = Color(0xFF62645F);
-  static const Color textFaint = Color(0xFF62645F);
+  static const Color textSecondary = Color(0xFF56645D);
+  static const Color textMuted = Color(0xFF56645D);
+  static const Color textSubtle = Color(0xFF56645D);
+  static const Color textFaint = Color(0xFF56645D);
 
   // Borders
-  static const Color borderSubtle = Color(0xFFDDDCD5);
-  static const Color borderFaint = Color(0xFFE2E1DA);
+  static const Color borderSubtle = Color(0xFFD8E0D8);
+  static const Color borderFaint = Color(0xFFE2E8E1);
   static const Color borderPrimary = Color(0x4D4F8CFF);
 
   // Traffic Lights

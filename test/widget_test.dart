@@ -52,6 +52,63 @@ void ambientTests() {
         .join();
     expect(a, isNot(b));
   });
+  testWidgets('Hero phone animates by itself, without pointer', (tester) async {
+    VisibilityDetectorController.instance.updateInterval = Duration.zero;
+    tester.view.physicalSize = const Size(1440, 1000);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    await initDependencies();
+    await tester.pumpWidget(const MahmoudPortfolioApp());
+    await tester.pump(const Duration(seconds: 2));
+    expect(find.byType(HeroPhoneIdle), findsOneWidget);
+    String snapshot() => tester
+        .widgetList<Transform>(
+          find.descendant(
+            of: find.byType(HeroPhoneIdle),
+            matching: find.byType(Transform),
+          ),
+        )
+        .map((x) => x.transform.toString())
+        .join();
+    final a = snapshot();
+    await tester.pump(const Duration(seconds: 3));
+    final b = snapshot();
+    expect(a, isNot(b));
+  });
+  testWidgets(
+    'Hero phone idle runs, respects reduced motion, and disposes safely',
+    (tester) async {
+      VisibilityDetectorController.instance.updateInterval = Duration.zero;
+      Widget probe(double t, bool motion) => Text(
+        '${motion ? 1 : 0}:${t.toStringAsFixed(3)}',
+        textDirection: TextDirection.ltr,
+      );
+      await tester.pumpWidget(
+        HeroPhoneIdle(builder: (c, t, motion) => probe(t, motion)),
+      );
+      await tester.pump(const Duration(seconds: 1));
+      final a = tester.widget<Text>(find.byType(Text)).data;
+      await tester.pump(const Duration(seconds: 2));
+      final b = tester.widget<Text>(find.byType(Text)).data;
+      expect(a, isNot(b));
+      await tester.pumpWidget(
+        MediaQuery(
+          data: const MediaQueryData(disableAnimations: true),
+          child: HeroPhoneIdle(builder: (c, t, motion) => probe(t, motion)),
+        ),
+      );
+      await tester.pump();
+      final x = tester.widget<Text>(find.byType(Text)).data;
+      await tester.pump(const Duration(seconds: 2));
+      final y = tester.widget<Text>(find.byType(Text)).data;
+      expect(x, y);
+      expect(x, startsWith('0:'));
+      await tester.pumpWidget(const SizedBox());
+      await tester.pump();
+      expect(tester.takeException(), isNull);
+    },
+  );
   testWidgets(
     'Ambient hero moves, respects reduced motion, and disposes safely',
     (tester) async {

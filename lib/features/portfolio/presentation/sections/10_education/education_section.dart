@@ -20,7 +20,7 @@ class EducationSection extends StatelessWidget {
             child: Container(
               width: double.infinity,
               margin: const EdgeInsets.only(bottom: 24),
-              padding: const EdgeInsets.all(28),
+              padding: const EdgeInsets.fromLTRB(32, 30, 32, 30),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(22),

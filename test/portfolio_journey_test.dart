@@ -91,7 +91,10 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(ProjectDetailPage), findsNothing);
       expect(
-        find.text('Complete apps.\nConsidered\nengineering.'),
+        find.text(
+          'Complete apps.\nConsidered\nengineering.',
+          findRichText: true,
+        ),
         findsOneWidget,
       );
       expect(tester.takeException(), isNull);
@@ -167,7 +170,7 @@ void main() {
     await tester.tap(find.byTooltip('Back to portfolio'));
     await tester.pumpAndSettle();
     expect(
-      find.text('Complete apps.\nConsidered\nengineering.'),
+      find.text('Complete apps.\nConsidered\nengineering.', findRichText: true),
       findsOneWidget,
     );
     expect(find.text('This page could not be found.'), findsNothing);

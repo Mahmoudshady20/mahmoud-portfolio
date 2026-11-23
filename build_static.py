@@ -93,3 +93,11 @@ for x in p['projects']:
 schema={'@context':'https://schema.org','@type':'Person','name':p['name'],'jobTitle':p['role'],'url':p['canonical'],'sameAs':[p['linkedin'],p['github']],'email':p['email']}
 index=out/'index.html';index.write_text(index.read_text().replace('</head>','<script type="application/ld+json">'+json.dumps(schema)+'</script></head>'))
 print('Built',len(list(out.rglob('*'))),'static files. Flutter source unchanged.')
+# Fingerprint CSS and JS so returning visitors do not reuse a stale release.
+import hashlib, subprocess
+for name in ('site.css','site.js'):
+    version=hashlib.sha256((out/name).read_bytes()).hexdigest()[:12]
+    for page in out.glob('*.html'):
+        page.write_text(page.read_text().replace(name+'"',name+'?v='+version+'"'))
+if shutil.which('node'):
+    subprocess.run(['node','--check',str(out/'site.js')],check=True)

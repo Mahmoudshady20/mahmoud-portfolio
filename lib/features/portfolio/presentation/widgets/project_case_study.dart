@@ -3,6 +3,7 @@ import '../../../../core/widgets/portfolio_ui.dart';
 import '../../../../core/widgets/project_artwork.dart';
 import '../../../../core/animations/scroll_reveal.dart';
 import '../../domain/entities/project_entity.dart';
+import 'guide_note.dart';
 
 class ProjectOverviewSection extends StatelessWidget {
   final ProjectEntity project;
@@ -26,6 +27,12 @@ class ProjectOverviewSection extends StatelessWidget {
         const SizedBox(height: 36),
         Text(project.description, style: prose(size: 20, color: ink)),
         const SizedBox(height: 26),
+        ProjectWalkthrough(
+          slug: project.slug,
+          challenge: project.challenge,
+          outcome: project.outcome,
+        ),
+        const SizedBox(height: 26),
         TechnologyLine(project.techStack),
       ],
     ),
@@ -46,6 +53,10 @@ class ProjectEngineeringSection extends StatelessWidget {
           const SizedBox(height: 20),
           Text(project.ownership, style: prose(size: 19, color: ink)),
           const SizedBox(height: 40),
+          const GuideNote(
+            'This is the part I’d show you in an interview — the problems I owned and how I solved them.',
+          ),
+          const SizedBox(height: 28),
           const EditorialHeading('The engineering challenge'),
           const SizedBox(height: 24),
           Text(project.challenge, style: prose(size: 18)),

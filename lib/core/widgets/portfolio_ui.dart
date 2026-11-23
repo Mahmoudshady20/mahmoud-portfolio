@@ -158,11 +158,13 @@ class HoverSurface extends StatefulWidget {
   final Widget child;
   final VoidCallback? onTap;
   final String? semanticLabel;
+  final ValueChanged<bool>? onHoverChanged;
   const HoverSurface({
     super.key,
     required this.child,
     this.onTap,
     this.semanticLabel,
+    this.onHoverChanged,
   });
   @override
   State<HoverSurface> createState() => _HoverSurfaceState();
@@ -170,36 +172,46 @@ class HoverSurface extends StatefulWidget {
 
 class _HoverSurfaceState extends State<HoverSurface> {
   bool hover = false;
+  void _setHover(bool value) {
+    if (value == hover) return;
+    setState(() => hover = value);
+    widget.onHoverChanged?.call(value);
+  }
+
   @override
   Widget build(BuildContext c) => MouseRegion(
-    onEnter: (_) => setState(() => hover = true),
-    onExit: (_) => setState(() => hover = false),
-    child: AnimatedContainer(
-      duration: PortfolioMotion.duration(c),
-      transform: Matrix4.translationValues(
-        0,
-        hover && PortfolioMotion.enabled(c) ? -7 : 0,
-        0,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        border: Border.all(color: hover ? accent : line),
-        borderRadius: BorderRadius.circular(22),
-        boxShadow: [
-          if (hover)
-            const BoxShadow(
-              color: Color(0x12222322),
-              blurRadius: 24,
-              offset: Offset(0, 10),
-            ),
-        ],
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: widget.onTap,
+    onEnter: (_) => _setHover(true),
+    onExit: (_) => _setHover(false),
+    // Its own repaint boundary keeps hover repaints inside this card instead
+    // of repainting the whole section layer on every pointer move.
+    child: RepaintBoundary(
+      child: AnimatedContainer(
+        duration: PortfolioMotion.duration(c),
+        transform: Matrix4.translationValues(
+          0,
+          hover && PortfolioMotion.enabled(c) ? -7 : 0,
+          0,
+        ),
+        decoration: BoxDecoration(
+          color: AppColors.surface,
+          border: Border.all(color: hover ? accent : line),
           borderRadius: BorderRadius.circular(22),
-          child: Semantics(label: widget.semanticLabel, child: widget.child),
+          boxShadow: [
+            if (hover)
+              const BoxShadow(
+                color: Color(0x12222322),
+                blurRadius: 24,
+                offset: Offset(0, 10),
+              ),
+          ],
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: widget.onTap,
+            borderRadius: BorderRadius.circular(22),
+            child: Semantics(label: widget.semanticLabel, child: widget.child),
+          ),
         ),
       ),
     ),
@@ -264,19 +276,21 @@ class EqualHeightGrid extends StatelessWidget {
     children: [
       for (int start = 0; start < children.length; start += columns) ...[
         if (start > 0) SizedBox(height: gap),
-        IntrinsicHeight(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              for (int col = 0; col < columns; col++) ...[
-                if (col > 0) SizedBox(width: gap),
-                Expanded(
-                  child: start + col < children.length
-                      ? children[start + col]
-                      : const SizedBox.shrink(),
-                ),
+        RepaintBoundary(
+          child: IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                for (int col = 0; col < columns; col++) ...[
+                  if (col > 0) SizedBox(width: gap),
+                  Expanded(
+                    child: start + col < children.length
+                        ? children[start + col]
+                        : const SizedBox.shrink(),
+                  ),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       ],

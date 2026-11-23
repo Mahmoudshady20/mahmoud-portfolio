@@ -35,7 +35,7 @@ void main() {
         child: const MahmoudPortfolioApp(),
       ),
     );
-    await tester.pumpAndSettle();
+    await pumpPortfolio(tester);
   }
 
   testWidgets('Verified employment and product boundaries remain accurate', (
@@ -84,11 +84,11 @@ void main() {
       await start(tester);
       final context = tester.element(find.text('Mahmoud Shady').first);
       Navigator.of(context).pushNamed('/projects/$slug');
-      await tester.pumpAndSettle();
+      await pumpPortfolio(tester);
       expect(find.byType(ProjectDetailPage), findsOneWidget);
       expect(find.text('The engineering challenge'), findsOneWidget);
       await tester.tap(find.byTooltip('Back to portfolio'));
-      await tester.pumpAndSettle();
+      await pumpPortfolio(tester);
       expect(find.byType(ProjectDetailPage), findsNothing);
       expect(
         find.text(
@@ -106,10 +106,10 @@ void main() {
   ) async {
     await start(tester, size: const Size(390, 844));
     await tester.tap(find.byTooltip('Open navigation'));
-    await tester.pumpAndSettle();
+    await pumpPortfolio(tester);
     expect(find.text('Navigation'.toUpperCase()), findsOneWidget);
     await tester.tap(find.text('Contact').last);
-    await tester.pumpAndSettle();
+    await pumpPortfolio(tester);
     expect(find.byTooltip('Close navigation'), findsNothing);
     final contact = tester
         .getTopLeft(find.text('Good products start\nwith a conversation.'))
@@ -139,7 +139,7 @@ void main() {
     Focus.of(tester.element(find.byIcon(Icons.menu_rounded))).requestFocus();
     await tester.pump();
     await tester.sendKeyEvent(LogicalKeyboardKey.enter);
-    await tester.pumpAndSettle();
+    await pumpPortfolio(tester);
     expect(find.byTooltip('Close navigation'), findsOneWidget);
   });
 
@@ -152,7 +152,7 @@ void main() {
         .read<NavigationCubit>();
     nav.scrollToSection('skills');
     nav.scrollToSection('contact');
-    await tester.pumpAndSettle();
+    await pumpPortfolio(tester);
     expect(nav.state.activeSection, 'contact');
     expect(tester.takeException(), isNull);
   });
@@ -168,11 +168,18 @@ void main() {
     await start(tester);
     expect(find.byType(ProjectDetailPage), findsOneWidget);
     await tester.tap(find.byTooltip('Back to portfolio'));
-    await tester.pumpAndSettle();
+    await pumpPortfolio(tester);
     expect(
       find.text('Complete apps.\nConsidered\nengineering.', findRichText: true),
       findsOneWidget,
     );
     expect(find.text('This page could not be found.'), findsNothing);
   });
+}
+
+// Ambient hero motion is intentionally continuous, so use a bounded frame pump.
+Future<void> pumpPortfolio(WidgetTester tester) async {
+  for (var frame = 0; frame < 20; frame++) {
+    await tester.pump(const Duration(milliseconds: 100));
+  }
 }

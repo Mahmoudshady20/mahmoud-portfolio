@@ -32,12 +32,19 @@ void main() {
         addTearDown(tester.view.resetDevicePixelRatio);
 
         await tester.pumpWidget(const MahmoudPortfolioApp());
-        await tester.pumpAndSettle();
+        await pumpPortfolio(tester);
 
         // Verify no exceptions were thrown and core brand elements render
         expect(find.text('Mahmoud Shady'), findsWidgets);
         expect(find.byType(SingleChildScrollView), findsWidgets);
       },
     );
+  }
+}
+
+// Ambient hero motion is intentionally continuous, so use a bounded frame pump.
+Future<void> pumpPortfolio(WidgetTester tester) async {
+  for (var frame = 0; frame < 20; frame++) {
+    await tester.pump(const Duration(milliseconds: 100));
   }
 }

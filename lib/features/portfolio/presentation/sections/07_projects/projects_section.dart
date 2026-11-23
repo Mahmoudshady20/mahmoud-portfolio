@@ -30,18 +30,13 @@ class ProjectsSection extends StatelessWidget {
           LayoutBuilder(
             builder: (c, b) {
               final columns = b.maxWidth > 780 ? 2 : 1;
-              final width = (b.maxWidth - (columns - 1) * 24) / columns;
-              return Wrap(
-                spacing: 24,
-                runSpacing: 28,
+              return EqualHeightGrid(
+                columns: columns,
                 children: List.generate(
                   4,
-                  (i) => SizedBox(
-                    width: width,
-                    child: ScrollReveal(
-                      delay: Duration(milliseconds: 80 * (i % 2)),
-                      child: _ProjectCard(projects[i]),
-                    ),
+                  (i) => ScrollReveal(
+                    delay: Duration(milliseconds: 110 * (i % columns)),
+                    child: _ProjectCard(projects[i]),
                   ),
                 ),
               );
@@ -53,44 +48,43 @@ class ProjectsSection extends StatelessWidget {
           LayoutBuilder(
             builder: (c, b) {
               final columns = b.maxWidth > 850 ? 3 : (b.maxWidth > 550 ? 2 : 1);
-              final width = (b.maxWidth - (columns - 1) * 20) / columns;
-              return Wrap(
-                spacing: 20,
-                runSpacing: 20,
-                children: projects
-                    .skip(4)
-                    .map(
-                      (p) => SizedBox(
-                        width: width,
-                        child: HoverSurface(
-                          onTap: () =>
-                              Navigator.pushNamed(c, '/projects/${p.slug}'),
-                          semanticLabel: 'Open ${p.title} case study',
-                          child: Padding(
-                            padding: const EdgeInsets.all(24),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Eyebrow(p.category),
-                                const SizedBox(height: 14),
-                                Text(p.title, style: display(25)),
-                                const SizedBox(height: 12),
-                                Text(p.description, style: prose(size: 14)),
-                                const SizedBox(height: 22),
-                                const Text(
-                                  'Explore case study ↗',
-                                  style: TextStyle(
-                                    color: accent,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
+              return EqualHeightGrid(
+                columns: columns,
+                children: projects.skip(4).toList().asMap().entries.map((
+                  entry,
+                ) {
+                  final p = entry.value;
+                  return ScrollReveal(
+                    delay: Duration(milliseconds: 100 * entry.key),
+                    child: HoverSurface(
+                      onTap: () =>
+                          Navigator.pushNamed(c, '/projects/${p.slug}'),
+                      semanticLabel: 'Open ${p.title} case study',
+                      child: Padding(
+                        padding: const EdgeInsets.all(28),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Eyebrow(p.category),
+                            const SizedBox(height: 16),
+                            Text(p.title, style: display(25)),
+                            const SizedBox(height: 16),
+                            Text(p.description, style: prose(size: 14)),
+                            const SizedBox(height: 24),
+                            const Spacer(),
+                            const Text(
+                              'Explore case study ↗',
+                              style: TextStyle(
+                                color: accent,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
-                    )
-                    .toList(),
+                    ),
+                  );
+                }).toList(),
               );
             },
           ),
@@ -114,47 +108,50 @@ class _ProjectCard extends StatelessWidget {
           borderRadius: const BorderRadius.vertical(top: Radius.circular(21)),
           child: ProjectArtwork(project: p),
         ),
-        Padding(
-          padding: const EdgeInsets.all(28),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Wrap(
-                spacing: 18,
-                runSpacing: 8,
-                children: [Eyebrow(p.category), StatusLabel(p.status)],
-              ),
-              const SizedBox(height: 20),
-              Text(p.heading, style: display(28)),
-              const SizedBox(height: 16),
-              Text(p.description, style: prose(size: 15)),
-              const SizedBox(height: 20),
-              Container(
-                padding: const EdgeInsets.only(left: 16),
-                decoration: const BoxDecoration(
-                  border: Border(left: BorderSide(color: accent, width: 2)),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(28),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(
+                  spacing: 18,
+                  runSpacing: 8,
+                  children: [Eyebrow(p.category), StatusLabel(p.status)],
                 ),
-                child: Text(p.outcome, style: prose(size: 14, color: ink)),
-              ),
-              const SizedBox(height: 26),
-              TechnologyLine(p.techStack.take(4).toList()),
-              const SizedBox(height: 26),
-              Row(
-                children: [
-                  const Expanded(
-                    child: Text(
-                      'Explore case study',
-                      style: TextStyle(
-                        color: accent,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
+                const SizedBox(height: 20),
+                Text(p.heading, style: display(28)),
+                const SizedBox(height: 16),
+                Text(p.description, style: prose(size: 15)),
+                const SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.only(left: 16),
+                  decoration: const BoxDecoration(
+                    border: Border(left: BorderSide(color: accent, width: 2)),
+                  ),
+                  child: Text(p.outcome, style: prose(size: 14, color: ink)),
+                ),
+                const SizedBox(height: 26),
+                TechnologyLine(p.techStack.take(4).toList()),
+                const Spacer(),
+                const SizedBox(height: 26),
+                Row(
+                  children: [
+                    const Expanded(
+                      child: Text(
+                        'Explore case study',
+                        style: TextStyle(
+                          color: accent,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
-                  ),
-                  Icon(Icons.arrow_forward_rounded, color: accent, size: 20),
-                ],
-              ),
-            ],
+                    Icon(Icons.arrow_forward_rounded, color: accent, size: 20),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ],

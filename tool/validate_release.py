@@ -66,7 +66,7 @@ def main():
                 assert resolved.path == data['email']
                 continue
             if resolved.netloc != urlparse(canonical).netloc:
-                assert resolved.netloc in {'www.linkedin.com', 'github.com', 'apps.apple.com', 'play.google.com'}
+                assert resolved.netloc in {'www.linkedin.com', 'github.com', 'apps.apple.com', 'play.google.com', 'fonts.gstatic.com'}
                 continue
             assert resolved.path.startswith(prefix), f'Unexpected local destination: {link}'
             local = root / resolved.path.removeprefix(prefix)

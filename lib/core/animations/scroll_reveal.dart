@@ -11,9 +11,9 @@ class ScrollReveal extends StatefulWidget {
   const ScrollReveal({
     super.key,
     required this.child,
-    this.duration = const Duration(milliseconds: 600),
+    this.duration = const Duration(milliseconds: 720),
     this.delay = Duration.zero,
-    this.offsetY = 18,
+    this.offsetY = 30,
     this.offsetX = 0,
     this.curve = Curves.easeOutCubic,
   });
@@ -58,10 +58,14 @@ class _ScrollRevealState extends State<ScrollReveal>
       builder: (c, child) {
         final t = widget.curve.transform(controller.value);
         return Opacity(
-          opacity: 0.18 + 0.82 * t,
+          opacity: 0.08 + 0.92 * t,
           child: Transform.translate(
             offset: Offset(widget.offsetX * (1 - t), widget.offsetY * (1 - t)),
-            child: child,
+            child: Transform.scale(
+              scale: .985 + .015 * t,
+              alignment: Alignment.topCenter,
+              child: child,
+            ),
           ),
         );
       },

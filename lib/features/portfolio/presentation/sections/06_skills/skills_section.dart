@@ -34,16 +34,16 @@ class SkillsSection extends StatelessWidget {
                     delay: Duration(milliseconds: 60 * (i % columns)),
                     child: HoverSurface(
                       child: Padding(
-                        padding: const EdgeInsets.all(26),
+                        padding: const EdgeInsets.fromLTRB(30, 30, 30, 28),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Eyebrow('0${i + 1}', color: accent),
-                            const SizedBox(height: 30),
+                            const SizedBox(height: 28),
                             Text(s.name, style: display(23)),
                             const SizedBox(height: 18),
                             Text(s.description, style: prose(size: 14)),
-                            const SizedBox(height: 22),
+                            const SizedBox(height: 26),
                             const Spacer(),
                             Text(
                               s.technologies.join(' · '),

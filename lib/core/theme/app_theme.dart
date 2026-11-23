@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'app_colors.dart';
 import 'app_typography.dart';
 
@@ -10,12 +11,12 @@ abstract class AppTheme {
     scaffoldBackgroundColor: AppColors.background,
     colorScheme: const ColorScheme.light(
       primary: AppColors.primary,
-      secondary: Color(0xffb9a7cf),
+      secondary: Color(0xffd5f78b),
       surface: AppColors.surface,
       onSurface: Color(0xff222322),
     ),
     dividerColor: const Color(0xffd9dad3),
-    focusColor: const Color(0xffdaceed),
+    focusColor: const Color(0xffd5f78b),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         minimumSize: const Size(48, 48),

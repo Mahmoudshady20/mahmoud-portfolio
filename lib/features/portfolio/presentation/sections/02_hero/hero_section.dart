@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mahmoud_portfolio/core/widgets/portfolio_ui.dart';
 import 'package:mahmoud_portfolio/core/constants/app_constants.dart';
 import 'package:mahmoud_portfolio/core/animations/scroll_reveal.dart';
+import 'package:mahmoud_portfolio/core/animations/pointer_parallax.dart';
 
 import '../../cubit/navigation_cubit.dart';
 
@@ -113,7 +114,9 @@ class HeroSection extends StatelessWidget {
           final visual = ScrollReveal(
             delay: const Duration(milliseconds: 180),
             child: MediaQuery.withNoTextScaling(
-              child: const HeroAmbient(child: _EngineeringComposition()),
+              child: const HeroAmbient(
+                child: PointerParallax(child: _EngineeringComposition()),
+              ),
             ),
           );
           return Column(
@@ -184,131 +187,136 @@ class _EngineeringComposition extends StatelessWidget {
                     Positioned(
                       top: 22,
                       left: 70,
-                      child: TweenAnimationBuilder<double>(
-                        tween: Tween(begin: 0, end: 1),
-                        duration: PortfolioMotion.duration(c, 1300),
-                        curve: Curves.easeOutCubic,
-                        builder: (c, t, child) => Transform.translate(
-                          offset: Offset(0, 28 * (1 - t)),
-                          child: Transform.rotate(
-                            angle: -.055 * t,
-                            child: child,
-                          ),
-                        ),
-                        child: Container(
-                          width: 242,
-                          height: 441,
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: const Color(0xff253c3c),
-                            borderRadius: BorderRadius.circular(38),
-                            border: Border.all(
-                              color: const Color(0xff608079),
-                              width: 1.5,
+                      child: ParallaxLayer(
+                        strength: 7,
+                        child: TweenAnimationBuilder<double>(
+                          tween: Tween(begin: 0, end: 1),
+                          duration: PortfolioMotion.duration(c, 1300),
+                          curve: Curves.easeOutCubic,
+                          builder: (c, t, child) => Transform.translate(
+                            offset: Offset(0, 28 * (1 - t)),
+                            child: Transform.rotate(
+                              angle: -.055 * t,
+                              child: child,
                             ),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Color(0x60000000),
-                                blurRadius: 45,
-                                offset: Offset(0, 25),
-                              ),
-                            ],
                           ),
                           child: Container(
-                            padding: const EdgeInsets.all(20),
+                            width: 242,
+                            height: 441,
+                            padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
-                              color: const Color(0xfff4f7ef),
-                              borderRadius: BorderRadius.circular(28),
+                              color: const Color(0xff253c3c),
+                              borderRadius: BorderRadius.circular(38),
+                              border: Border.all(
+                                color: const Color(0xff608079),
+                                width: 1.5,
+                              ),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color(0x60000000),
+                                  blurRadius: 45,
+                                  offset: Offset(0, 25),
+                                ),
+                              ],
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Center(
-                                  child: Container(
-                                    width: 58,
-                                    height: 5,
-                                    decoration: BoxDecoration(
-                                      color: _night,
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 29),
-                                const Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Icon(Icons.apps_rounded, color: _night),
-                                    Icon(
-                                      Icons.north_east_rounded,
-                                      color: _night,
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 22),
-                                Text(
-                                  'Thoughtfully\nbuilt.',
-                                  style: display(31, color: _night),
-                                ),
-                                const SizedBox(height: 20),
-                                Container(
-                                  height: 83,
-                                  padding: const EdgeInsets.all(14),
-                                  decoration: BoxDecoration(
-                                    color: _lime,
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: const Row(
-                                    children: [
-                                      Icon(
-                                        Icons.layers_outlined,
-                                        size: 32,
+                            child: Container(
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: const Color(0xfff4f7ef),
+                                borderRadius: BorderRadius.circular(28),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Center(
+                                    child: Container(
+                                      width: 58,
+                                      height: 5,
+                                      decoration: BoxDecoration(
                                         color: _night,
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
-                                      SizedBox(width: 12),
-                                      Expanded(
-                                        child: Text(
-                                          'One product.\nEvery layer.',
-                                          style: TextStyle(
-                                            color: _night,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 29),
+                                  const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Icon(Icons.apps_rounded, color: _night),
+                                      Icon(
+                                        Icons.north_east_rounded,
+                                        color: _night,
                                       ),
                                     ],
                                   ),
-                                ),
-                                const SizedBox(height: 14),
-                                for (final w in [150.0, 110.0, 135.0])
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 9),
-                                    child: Container(
-                                      width: w,
-                                      height: 7,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xffd8e2d9),
-                                        borderRadius: BorderRadius.circular(6),
-                                      ),
+                                  const SizedBox(height: 22),
+                                  Text(
+                                    'Thoughtfully\nbuilt.',
+                                    style: display(31, color: _night),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Container(
+                                    height: 83,
+                                    padding: const EdgeInsets.all(14),
+                                    decoration: BoxDecoration(
+                                      color: _lime,
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    child: const Row(
+                                      children: [
+                                        Icon(
+                                          Icons.layers_outlined,
+                                          size: 32,
+                                          color: _night,
+                                        ),
+                                        SizedBox(width: 12),
+                                        Expanded(
+                                          child: Text(
+                                            'One product.\nEvery layer.',
+                                            style: TextStyle(
+                                              color: _night,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                const Spacer(),
-                                const Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Icon(Icons.home_rounded, color: _night),
-                                    Icon(
-                                      Icons.grid_view_rounded,
-                                      color: Color(0xff81948b),
+                                  const SizedBox(height: 14),
+                                  for (final w in [150.0, 110.0, 135.0])
+                                    Padding(
+                                      padding: const EdgeInsets.only(bottom: 9),
+                                      child: Container(
+                                        width: w,
+                                        height: 7,
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xffd8e2d9),
+                                          borderRadius: BorderRadius.circular(
+                                            6,
+                                          ),
+                                        ),
+                                      ),
                                     ),
-                                    Icon(
-                                      Icons.person_outline_rounded,
-                                      color: Color(0xff81948b),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                  const Spacer(),
+                                  const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Icon(Icons.home_rounded, color: _night),
+                                      Icon(
+                                        Icons.grid_view_rounded,
+                                        color: Color(0xff81948b),
+                                      ),
+                                      Icon(
+                                        Icons.person_outline_rounded,
+                                        color: Color(0xff81948b),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -317,19 +325,25 @@ class _EngineeringComposition extends StatelessWidget {
                     Positioned(
                       top: 0,
                       left: 0,
-                      child: _label(
-                        Icons.account_tree_outlined,
-                        'Clean architecture',
-                        'A foundation for change',
+                      child: ParallaxLayer(
+                        strength: 16,
+                        child: _label(
+                          Icons.account_tree_outlined,
+                          'Clean architecture',
+                          'A foundation for change',
+                        ),
                       ),
                     ),
                     Positioned(
                       bottom: 55,
                       right: 0,
-                      child: _label(
-                        Icons.check_circle_outline_rounded,
-                        'Built for real life',
-                        'From interface to integration',
+                      child: ParallaxLayer(
+                        strength: 26,
+                        child: _label(
+                          Icons.check_circle_outline_rounded,
+                          'Built for real life',
+                          'From interface to integration',
+                        ),
                       ),
                     ),
                     const Positioned(

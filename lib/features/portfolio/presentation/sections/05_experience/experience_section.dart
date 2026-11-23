@@ -18,9 +18,12 @@ class ExperienceSection extends StatelessWidget {
         for (final e in sl<PortfolioRepository>().getExperiences())
           ScrollReveal(
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 30),
-              decoration: const BoxDecoration(
-                border: Border(top: BorderSide(color: line)),
+              margin: const EdgeInsets.only(bottom: 24),
+              padding: const EdgeInsets.all(28),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(22),
+                border: Border.all(color: line),
               ),
               child: LayoutBuilder(
                 builder: (c, b) {

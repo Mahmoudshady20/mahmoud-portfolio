@@ -41,6 +41,19 @@ jobs:
       - name: Build Flutter Web
         run: flutter build web --release --base-href "/${{ github.event.repository.name }}/"
 
+      - name: Fingerprint startup assets
+        run: |
+          python3 - <<'PYCODE'
+          from pathlib import Path
+          import hashlib
+          root = Path('build/web')
+          release = hashlib.sha256((root / 'main.dart.js').read_bytes()).hexdigest()[:16]
+          for name in ('index.html', 'flutter_bootstrap.js'):
+              p = root / name
+              p.write_text(p.read_text().replace('__RELEASE__', release))
+          print('Startup cache key:', release)
+          PYCODE
+
       - name: Validate public release content
         run: python3 tool/validate_release.py
 

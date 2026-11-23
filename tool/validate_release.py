@@ -92,8 +92,8 @@ def main():
     assert len(js) < 4_000_000, 'Application JS exceeded the 4 MB release budget'
     assert 'canvasKitBaseUrl' in (root / 'flutter_bootstrap.js').read_text()
     ratios = {}
-    for label, foreground in [('primary', '222322'), ('secondary', '62645f'), ('accent', '694d91')]:
-        a, b = sorted([luminance(foreground), luminance('f6f4ef')])
+    for label, foreground in [('primary', '222322'), ('secondary', '56645d'), ('accent', '24644f')]:
+        a, b = sorted([luminance(foreground), luminance('f5f7f4')])
         ratio = (b + .05) / (a + .05)
         assert ratio >= 4.5, f'{label} text fails minimum normal-text contrast'
         ratios[label] = round(ratio, 2)

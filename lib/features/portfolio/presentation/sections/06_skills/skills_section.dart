@@ -32,28 +32,25 @@ class SkillsSection extends StatelessWidget {
                   final s = skills[i];
                   return ScrollReveal(
                     delay: Duration(milliseconds: 60 * (i % columns)),
-                    child: Container(
-                      padding: const EdgeInsets.all(26),
-                      decoration: BoxDecoration(
-                        color: paper,
-                        border: Border.all(color: line),
-                        borderRadius: BorderRadius.circular(22),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Eyebrow('0${i + 1}', color: accent),
-                          const SizedBox(height: 30),
-                          Text(s.name, style: display(23)),
-                          const SizedBox(height: 18),
-                          Text(s.description, style: prose(size: 14)),
-                          const SizedBox(height: 22),
-                          const Spacer(),
-                          Text(
-                            s.technologies.join(' · '),
-                            style: prose(size: 12, color: ink),
-                          ),
-                        ],
+                    child: HoverSurface(
+                      child: Padding(
+                        padding: const EdgeInsets.all(26),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Eyebrow('0${i + 1}', color: accent),
+                            const SizedBox(height: 30),
+                            Text(s.name, style: display(23)),
+                            const SizedBox(height: 18),
+                            Text(s.description, style: prose(size: 14)),
+                            const SizedBox(height: 22),
+                            const Spacer(),
+                            Text(
+                              s.technologies.join(' · '),
+                              style: prose(size: 12, color: ink),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );

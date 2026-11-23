@@ -200,124 +200,9 @@ class _EngineeringComposition extends StatelessWidget {
                               child: child,
                             ),
                           ),
-                          child: Container(
-                            width: 242,
-                            height: 441,
-                            padding: const EdgeInsets.all(10),
-                            decoration: BoxDecoration(
-                              color: const Color(0xff253c3c),
-                              borderRadius: BorderRadius.circular(38),
-                              border: Border.all(
-                                color: const Color(0xff608079),
-                                width: 1.5,
-                              ),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Color(0x60000000),
-                                  blurRadius: 45,
-                                  offset: Offset(0, 25),
-                                ),
-                              ],
-                            ),
-                            child: Container(
-                              padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: const Color(0xfff4f7ef),
-                                borderRadius: BorderRadius.circular(28),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Center(
-                                    child: Container(
-                                      width: 58,
-                                      height: 5,
-                                      decoration: BoxDecoration(
-                                        color: _night,
-                                        borderRadius: BorderRadius.circular(4),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 29),
-                                  const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Icon(Icons.apps_rounded, color: _night),
-                                      Icon(
-                                        Icons.north_east_rounded,
-                                        color: _night,
-                                      ),
-                                    ],
-                                  ),
-                                  const SizedBox(height: 22),
-                                  Text(
-                                    'Thoughtfully\nbuilt.',
-                                    style: display(31, color: _night),
-                                  ),
-                                  const SizedBox(height: 20),
-                                  Container(
-                                    height: 83,
-                                    padding: const EdgeInsets.all(14),
-                                    decoration: BoxDecoration(
-                                      color: _lime,
-                                      borderRadius: BorderRadius.circular(16),
-                                    ),
-                                    child: const Row(
-                                      children: [
-                                        Icon(
-                                          Icons.layers_outlined,
-                                          size: 32,
-                                          color: _night,
-                                        ),
-                                        SizedBox(width: 12),
-                                        Expanded(
-                                          child: Text(
-                                            'One product.\nEvery layer.',
-                                            style: TextStyle(
-                                              color: _night,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(height: 14),
-                                  for (final w in [150.0, 110.0, 135.0])
-                                    Padding(
-                                      padding: const EdgeInsets.only(bottom: 9),
-                                      child: Container(
-                                        width: w,
-                                        height: 7,
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xffd8e2d9),
-                                          borderRadius: BorderRadius.circular(
-                                            6,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  const Spacer(),
-                                  const Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Icon(Icons.home_rounded, color: _night),
-                                      Icon(
-                                        Icons.grid_view_rounded,
-                                        color: Color(0xff81948b),
-                                      ),
-                                      Icon(
-                                        Icons.person_outline_rounded,
-                                        color: Color(0xff81948b),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
+                          child: HeroPhoneIdle(
+                            builder: (c, t, motion) =>
+                                _HeroPhone(t: t, motion: motion),
                           ),
                         ),
                       ),
@@ -403,6 +288,275 @@ class _EngineeringComposition extends StatelessWidget {
       ],
     ),
   );
+}
+
+/// The hero phone mockup. When [motion] is true, [t] (0..1, looping) drives a
+/// continuous idle life: the handset bobs and sways, the feature card pulses,
+/// placeholder lines breathe, a soft sheen sweeps the screen and the tab bar
+/// cycles. When [motion] is false the original static layout renders verbatim.
+class _HeroPhone extends StatelessWidget {
+  final double t;
+  final bool motion;
+  const _HeroPhone({required this.t, required this.motion});
+
+  @override
+  Widget build(BuildContext c) {
+    final wave = math.sin(2 * math.pi * t);
+    final bob = motion ? -9.0 * wave : 0.0;
+    final sway = motion ? 0.018 * math.sin(2 * math.pi * t + 1.2) : 0.0;
+    final cardScale = motion
+        ? 1.0 + 0.035 * math.sin(2 * math.pi * t + .6)
+        : 1.0;
+    final activeTab = motion ? (t * 3).floor() % 3 : 0;
+    const barWidths = [150.0, 110.0, 135.0];
+    const barPhases = [0.0, 1.4, 2.8];
+    return Transform.translate(
+      offset: Offset(0, bob),
+      child: Transform.rotate(
+        angle: sway,
+        child: RepaintBoundary(
+          child: Container(
+            width: 242,
+            height: 441,
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: const Color(0xff253c3c),
+              borderRadius: BorderRadius.circular(38),
+              border: Border.all(
+                color: const Color(0xff608079),
+                width: 1.5,
+              ),
+              boxShadow: const [
+                BoxShadow(
+                  color: Color(0x60000000),
+                  blurRadius: 45,
+                  offset: Offset(0, 25),
+                ),
+              ],
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(28),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xfff4f7ef),
+                  borderRadius: BorderRadius.circular(28),
+                ),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Container(
+                              width: 58,
+                              height: 5,
+                              decoration: BoxDecoration(
+                                color: _night,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 29),
+                          const Row(
+                            mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(Icons.apps_rounded, color: _night),
+                              Icon(
+                                Icons.north_east_rounded,
+                                color: _night,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 22),
+                          Text(
+                            'Thoughtfully\nbuilt.',
+                            style: display(31, color: _night),
+                          ),
+                          const SizedBox(height: 20),
+                          Transform.scale(
+                            scale: cardScale,
+                            child: Container(
+                              height: 83,
+                              padding: const EdgeInsets.all(14),
+                              decoration: BoxDecoration(
+                                color: _lime,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: const Row(
+                                children: [
+                                  Icon(
+                                    Icons.layers_outlined,
+                                    size: 32,
+                                    color: _night,
+                                  ),
+                                  SizedBox(width: 12),
+                                  Expanded(
+                                    child: Text(
+                                      'One product.\nEvery layer.',
+                                      style: TextStyle(
+                                        color: _night,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 14),
+                          for (var i = 0; i < barWidths.length; i++)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 9),
+                              child: Container(
+                                width: barWidths[i] *
+                                    (motion
+                                        ? 0.62 +
+                                            0.38 *
+                                                (0.5 +
+                                                    0.5 *
+                                                        math.sin(
+                                                          2 * math.pi * t +
+                                                              barPhases[i],
+                                                        ))
+                                        : 1.0),
+                                height: 7,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffd8e2d9),
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                              ),
+                            ),
+                          const Spacer(),
+                          Row(
+                            mainAxisAlignment:
+                                MainAxisAlignment.spaceAround,
+                            children: [
+                              for (var i = 0; i < 3; i++)
+                                Icon(
+                                  const [
+                                    Icons.home_rounded,
+                                    Icons.grid_view_rounded,
+                                    Icons.person_outline_rounded,
+                                  ][i],
+                                  color: i == activeTab
+                                      ? _night
+                                      : const Color(0xff81948b),
+                                ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    if (motion)
+                      Positioned.fill(
+                        child: IgnorePointer(
+                          child: FractionalTranslation(
+                            translation: Offset(-1.4 + 5.8 * t, 0),
+                            child: FractionallySizedBox(
+                              widthFactor: .3,
+                              heightFactor: 1.6,
+                              child: Transform.rotate(
+                                angle: .3,
+                                child: const DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color(0x00ffffff),
+                                        Color(0x29ffffff),
+                                        Color(0x00ffffff),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Drives the hero phone's automatic idle animation. Self-playing and
+/// continuous (no pointer needed), paused offscreen, in the background or
+/// when reduced motion is requested. All movement is transform/opacity only.
+class HeroPhoneIdle extends StatefulWidget {
+  final Widget Function(BuildContext context, double t, bool motion) builder;
+  const HeroPhoneIdle({super.key, required this.builder});
+  @override
+  State<HeroPhoneIdle> createState() => _HeroPhoneIdleState();
+}
+
+class _HeroPhoneIdleState extends State<HeroPhoneIdle>
+    with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+  late final AnimationController controller = AnimationController(
+    vsync: this,
+    duration: const Duration(seconds: 6),
+  );
+  final visibilityKey = UniqueKey();
+  bool visible = true;
+  bool foreground = true;
+  bool disposed = false;
+  void syncMotion() {
+    if (disposed || !mounted) return;
+    if (visible && foreground && PortfolioMotion.enabled(context)) {
+      if (!controller.isAnimating) controller.repeat();
+    } else {
+      controller.stop();
+      if (!PortfolioMotion.enabled(context)) controller.value = 0;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    syncMotion();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    foreground = state == AppLifecycleState.resumed;
+    syncMotion();
+  }
+
+  @override
+  Widget build(BuildContext context) => VisibilityDetector(
+    key: visibilityKey,
+    onVisibilityChanged: (info) {
+      visible = info.visibleFraction > .02;
+      syncMotion();
+    },
+    child: AnimatedBuilder(
+      animation: controller,
+      builder: (context, _) =>
+          widget.builder(context, controller.value, PortfolioMotion.enabled(context)),
+    ),
+  );
+  @override
+  void dispose() {
+    disposed = true;
+    WidgetsBinding.instance.removeObserver(this);
+    controller.dispose();
+    super.dispose();
+  }
 }
 
 class _CircuitPainter extends CustomPainter {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 import '../utils/url_helper.dart';
 import '../theme/app_typography.dart';
@@ -13,7 +14,9 @@ const ink = AppColors.textPrimary,
 abstract class PortfolioMotion {
   static bool enabled(BuildContext c) =>
       !(MediaQuery.maybeOf(c)?.disableAnimations ?? false) &&
-      !(MediaQuery.maybeOf(c)?.accessibleNavigation ?? false);
+      // Web semantics is always on for keyboard/screen-reader access.
+      // Flutter Web maps that to accessibleNavigation even without reduced motion.
+      (kIsWeb || !(MediaQuery.maybeOf(c)?.accessibleNavigation ?? false));
   static Duration duration(BuildContext c, [int ms = 240]) =>
       enabled(c) ? Duration(milliseconds: ms) : Duration.zero;
 }

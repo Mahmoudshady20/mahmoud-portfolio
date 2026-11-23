@@ -17,7 +17,7 @@ class CustomNavigationBar extends StatelessWidget {
     builder: (c, s) => Container(
       height: MediaQuery.textScalerOf(c).scale(17) > 27 ? 108 : 84,
       decoration: BoxDecoration(
-        color: paper.withValues(alpha: 0.98),
+        color: paper,
         border: Border(
           bottom: BorderSide(color: s.isScrolled ? line : Colors.transparent),
         ),

@@ -106,7 +106,14 @@ class _ProjectCard extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: const BorderRadius.vertical(top: Radius.circular(21)),
-          child: ProjectArtwork(project: p),
+          child: SizedBox(
+            height:
+                MediaQuery.sizeOf(c).width > 900 &&
+                    MediaQuery.textScalerOf(c).scale(14) < 20
+                ? 340
+                : null,
+            child: ProjectArtwork(project: p),
+          ),
         ),
         Expanded(
           child: Padding(

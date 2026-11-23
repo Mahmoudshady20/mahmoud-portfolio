@@ -111,7 +111,7 @@ class _ProjectCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ClipRRect(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(11)),
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(21)),
           child: ProjectArtwork(project: p),
         ),
         Padding(

@@ -23,7 +23,7 @@ class AboutSection extends StatelessWidget {
               ),
               const SizedBox(height: 18),
               Text(
-                'I build applications from scratch and maintain published products. I can independently carry substantial mobile development while collaborating with designers, backend engineers, and other contributors.',
+                'I connect clean architecture with practical product needs: API and Firebase integrations, Arabic/RTL interfaces, persistent data, and focused testing. I build applications from scratch, maintain published products, and collaborate with designers and backend engineers through delivery.',
                 style: prose(size: 16),
               ),
             ],

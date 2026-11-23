@@ -30,11 +30,24 @@ class _ScrollRevealState extends State<ScrollReveal>
   final Key visibilityKey = UniqueKey();
   Timer? timer;
   bool revealed = false;
+  // Stop visibility callbacks after entry, without replacing the child tree.
+  bool settled = false;
+  @override
+  void initState() {
+    super.initState();
+    controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed && mounted && !settled) {
+        setState(() => settled = true);
+      }
+    });
+  }
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     if (!PortfolioMotion.enabled(context)) {
       revealed = true;
+      settled = true;
       timer?.cancel();
       controller.value = 1;
     }
@@ -51,26 +64,23 @@ class _ScrollRevealState extends State<ScrollReveal>
   @override
   Widget build(BuildContext c) => VisibilityDetector(
     key: visibilityKey,
-    onVisibilityChanged: reveal,
+    onVisibilityChanged: settled ? null : reveal,
     child: AnimatedBuilder(
       animation: controller,
-      child: widget.child,
+      child: RepaintBoundary(child: widget.child),
       builder: (c, child) {
         final t = widget.curve.transform(controller.value);
-        return Opacity(
-          opacity: 0.08 + 0.92 * t,
-          child: Transform.translate(
-            offset: Offset(widget.offsetX * (1 - t), widget.offsetY * (1 - t)),
-            child: Transform.scale(
-              scale: .985 + .015 * t,
-              alignment: Alignment.topCenter,
-              child: child,
-            ),
-          ),
+        // Translation only. Fading an entire tall section made Flutter render
+        // a large offscreen opacity surface during its entrance. Keep the
+        // same subtree at completion so interactive state is not recreated.
+        return Transform.translate(
+          offset: Offset(widget.offsetX * (1 - t), widget.offsetY * (1 - t)),
+          child: child,
         );
       },
     ),
   );
+
   @override
   void dispose() {
     timer?.cancel();

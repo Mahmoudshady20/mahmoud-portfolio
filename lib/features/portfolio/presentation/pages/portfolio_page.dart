@@ -46,12 +46,10 @@ class _PortfolioPageState extends State<PortfolioPage> {
                   ('education', const EducationSection()),
                   ('contact', const ContactSection()),
                 ])
-                  RepaintBoundary(
-                    child: SizedBox(
-                      key: nav.sectionKeys[key],
-                      width: double.infinity,
-                      child: widget,
-                    ),
+                  SizedBox(
+                    key: nav.sectionKeys[key],
+                    width: double.infinity,
+                    child: widget,
                   ),
                 const FooterSection(),
               ],
@@ -80,12 +78,14 @@ class _PortfolioPageState extends State<PortfolioPage> {
                                 controller.position.maxScrollExtent)
                             .clamp(0.0, 1.0)
                       : 0.0;
-                  return LinearProgressIndicator(
-                    value: progress,
-                    minHeight: 2,
-                    backgroundColor: Colors.transparent,
-                    color: accent,
-                    semanticsLabel: 'Page reading progress',
+                  return RepaintBoundary(
+                    child: LinearProgressIndicator(
+                      value: progress,
+                      minHeight: 2,
+                      backgroundColor: Colors.transparent,
+                      color: accent,
+                      semanticsLabel: 'Page reading progress',
+                    ),
                   );
                 },
               ),

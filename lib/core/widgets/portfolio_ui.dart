@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../utils/url_helper.dart';
 import '../theme/app_typography.dart';
 import '../theme/app_colors.dart';
@@ -133,7 +134,7 @@ class PortfolioButton extends StatelessWidget {
         minimumSize: const Size(48, 52),
         padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 17),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(14),
           side: primary
               ? BorderSide.none
               : BorderSide(color: inverse ? const Color(0xff777970) : line),
@@ -174,13 +175,13 @@ class _HoverSurfaceState extends State<HoverSurface> {
       duration: PortfolioMotion.duration(c),
       transform: Matrix4.translationValues(
         0,
-        hover && PortfolioMotion.enabled(c) ? -4 : 0,
+        hover && PortfolioMotion.enabled(c) ? -7 : 0,
         0,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.surface,
         border: Border.all(color: hover ? accent : line),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(22),
         boxShadow: [
           if (hover)
             const BoxShadow(
@@ -194,7 +195,7 @@ class _HoverSurfaceState extends State<HoverSurface> {
         color: Colors.transparent,
         child: InkWell(
           onTap: widget.onTap,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(22),
           child: Semantics(label: widget.semanticLabel, child: widget.child),
         ),
       ),
@@ -215,7 +216,7 @@ class TechnologyLine extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
               border: Border.all(color: line),
-              borderRadius: BorderRadius.circular(4),
+              borderRadius: BorderRadius.circular(50),
             ),
             child: Text(x, style: prose(size: 11.5, color: ink)),
           ),

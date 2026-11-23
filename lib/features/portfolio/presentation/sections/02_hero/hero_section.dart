@@ -314,7 +314,7 @@ class _EngineeringComposition extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: 110,
+                      top: 0,
                       left: 0,
                       child: _label(
                         Icons.account_tree_outlined,
